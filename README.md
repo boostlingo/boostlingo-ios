@@ -213,6 +213,6 @@ self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selected
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/booostlingo-ios/0.1.0/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.0/docs/index.html)
 
 
