@@ -15,6 +15,10 @@ You can add Boostlingo SDK for iOS by adding the following line to your Cartfile
 github "boostlingo/boostlingo-ios"
 ```
 
+> NOTE: At this time, Carthage does not provide a way to build only specific repository submodules. All submodules and their dependencies will be built with the above command. However, you don't need to copy frameworks you aren't using into your project. Due to that first build of Carthage dependencies may take long time.
+
+> OPTIONAL: If you don't want to wait long time for the first build you can download pre-build Carthage dependencies [here](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.2/Carthage.zip).
+
 Then run `carthage bootstrap` (or `carthage update --cache-builds` if you are updating your SDKs).
 
 On your application targets’ “General” settings tab, in the “Linked Frameworks and Libraries” section, drag and drop each framework you want to use from the Carthage/Build folder on disk. For Boostlingo SDK you will need to link following frameworks:
@@ -22,7 +26,6 @@ On your application targets’ “General” settings tab, in the “Linked Fram
 ```sh
 Alamofire.framework, Moya.framework, Result.framework, TwilioVoice.framework, Boostlingo.framework
 ```
-> NOTE: At this time, Carthage does not provide a way to build only specific repository submodules. All submodules and their dependencies will be built with the above command. However, you don't need to copy frameworks you aren't using into your project. Due to that first build of Carthage dependencies may take long time.
 
 On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase”. Create a Run Script in which you specify your shell (ex: `/bin/sh`), add the following contents to the script area below the shell:
 
@@ -213,6 +216,6 @@ self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selected
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.1/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.2/docs/index.html)
 
 

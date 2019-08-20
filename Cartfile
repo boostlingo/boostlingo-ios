@@ -1,2 +1,2 @@
-github "Moya/Moya"
-github "twilio/twilio-voice-ios"
+github "Moya/Moya" == 13.0.1
+github "twilio/twilio-voice-ios" == 4.3.0
