@@ -17,7 +17,7 @@ github "boostlingo/boostlingo-ios"
 
 > NOTE: At this time, Carthage does not provide a way to build only specific repository submodules. All submodules and their dependencies will be built with the above command. However, you don't need to copy frameworks you aren't using into your project. Due to that first build of Carthage dependencies may take long time.
 
-> OPTIONAL: If you don't want to wait long time for the first build you can download pre-build Carthage dependencies [here](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.2/Carthage.zip).
+> OPTIONAL: If you don't want to wait long time for the first build you can download pre-build Carthage dependencies [here](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.3/Carthage.zip).
 
 Then run `carthage bootstrap` (or `carthage update --cache-builds` if you are updating your SDKs).
 
@@ -123,7 +123,16 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
     }
     else {
         self.state = .notAuthenticated
-        let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
+        let message: String
+        switch error! {
+        case BLError.apiCall(_, let statusCode):
+            message = "\(error!.localizedDescription), statusCode: \(statusCode)"
+            break
+        default:
+            message = error!.localizedDescription
+            break
+        }
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
@@ -216,6 +225,6 @@ self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selected
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.2/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.3/docs/index.html)
 
 

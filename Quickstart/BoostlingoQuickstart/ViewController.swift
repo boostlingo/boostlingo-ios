@@ -368,7 +368,16 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
             }
             else {
                 self.state = .notAuthenticated
-                let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
+                let message: String
+                switch error! {
+                case BLError.apiCall(_, let statusCode):
+                    message = "\(error!.localizedDescription), statusCode: \(statusCode)"
+                    break
+                default:
+                    message = error!.localizedDescription
+                    break
+                }
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alert, animated: true)
             }
@@ -461,7 +470,16 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
                 }
                 else {
                     self.state = .authenticated
-                    let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
+                    let message: String
+                    switch error! {
+                    case BLError.apiCall(_, let statusCode):
+                        message = "\(error!.localizedDescription), statusCode: \(statusCode)"
+                        break
+                    default:
+                        message = error!.localizedDescription
+                        break
+                    }
+                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
                 }
