@@ -1,12 +1,30 @@
 # Boostlingo iOS
 
-The Boostlingo iOS swift library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.
+The Boostlingo iOS Swift library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.
 
 ## Getting Started
 
 In order to place calls in Boostlingo, you must have a requestor account. You can then embed Boostlingo iOS into your application, request a Boostlingo API token from your server, and start making calls.
 
 ## Installation
+
+### CocoaPods
+
+It's easy to install the framework if you manage your dependencies using [CocoaPods](https://cocoapods.org/). Simply add the following to your Podfile:
+
+```sh
+source 'https://github.com/cocoapods/specs'
+
+target 'TARGET_NAME' do
+  use_frameworks!
+
+  pod 'BoostlingoSDK', '~> 0.1.5'
+end
+```
+
+Then run `pod install --verbose` to install the dependencies to your project.
+
+### Cartfile
 
 The Boostlingo iOS framework can be installed using [Cartfile](https://github.com/Carthage/Carthage).
 You can add Boostlingo SDK for iOS by adding the following line to your Cartfile:
@@ -17,14 +35,12 @@ github "boostlingo/boostlingo-ios"
 
 > NOTE: At this time, Carthage does not provide a way to build only specific repository submodules. All submodules and their dependencies will be built with the above command. However, you don't need to copy frameworks you aren't using into your project. Due to that first build of Carthage dependencies may take long time.
 
-> OPTIONAL: If you don't want to wait long time for the first build you can download pre-build Carthage dependencies [here](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.4/Carthage.zip).
-
 Then run `carthage bootstrap --cache-builds` (or `carthage update --cache-builds` if you are updating your SDKs).
 
 On your application targets’ “General” settings tab, in the “Linked Frameworks and Libraries” section, drag and drop each framework you want to use from the Carthage/Build folder on disk. For Boostlingo SDK you will need to link following frameworks:
 
 ```sh
-Alamofire.framework, Moya.framework, TwilioVoice.framework, Boostlingo.framework
+TwilioVoice.framework, Boostlingo.framework
 ```
 
 On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase”. Create a Run Script in which you specify your shell (ex: `/bin/sh`), add the following contents to the script area below the shell:
@@ -36,8 +52,6 @@ On your application targets’ “Build Phases” settings tab, click the “+�
 Add the paths to the frameworks you want to use under “Input Files":
 
 ```sh
-$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework
-$(SRCROOT)/Carthage/Build/iOS/Moya.framework
 $(SRCROOT)/Carthage/Build/iOS/TwilioVoice.framework
 $(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework
 ```
@@ -45,8 +59,6 @@ $(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework
 Add the paths to the copied frameworks to the “Output Files”:
 
 ```sh
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework
 $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVoice.framework
 $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Boostlingo.framework
 ```
@@ -75,7 +87,7 @@ Request Model
 ```
 
 Response Model
-`token` is what will be needed by the boostlingo-js library
+`token` is what will be needed by the boostlingo sdk
 
 ```json
 {
@@ -223,6 +235,6 @@ self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selected
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.4/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.5/docs/index.html)
 
 
