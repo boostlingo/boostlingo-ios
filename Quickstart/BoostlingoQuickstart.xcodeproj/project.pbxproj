@@ -12,10 +12,7 @@
 		8425C5AF227CC653008456E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8425C5AD227CC653008456E2 /* Main.storyboard */; };
 		8425C5B1227CC655008456E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8425C5B0227CC655008456E2 /* Assets.xcassets */; };
 		8425C5B4227CC655008456E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8425C5B2227CC655008456E2 /* LaunchScreen.storyboard */; };
-		84622B0E227CC76000FF8C47 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84622B0D227CC76000FF8C47 /* Alamofire.framework */; };
 		84622B10227CC76300FF8C47 /* Boostlingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84622B0F227CC76300FF8C47 /* Boostlingo.framework */; };
-		84622B12227CC76600FF8C47 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84622B11227CC76600FF8C47 /* Moya.framework */; };
-		84622B14227CC76900FF8C47 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84622B13227CC76900FF8C47 /* Result.framework */; };
 		84622B16227CC76F00FF8C47 /* TwilioVoice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84622B15227CC76E00FF8C47 /* TwilioVoice.framework */; };
 		84622B19227CC82900FF8C47 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84622B18227CC82900FF8C47 /* TableViewController.swift */; };
 		84622B1C227CC83000FF8C47 /* TableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84622B1B227CC82F00FF8C47 /* TableViewItem.swift */; };
@@ -43,10 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84622B14227CC76900FF8C47 /* Result.framework in Frameworks */,
-				84622B0E227CC76000FF8C47 /* Alamofire.framework in Frameworks */,
 				84622B10227CC76300FF8C47 /* Boostlingo.framework in Frameworks */,
-				84622B12227CC76600FF8C47 /* Moya.framework in Frameworks */,
 				84622B16227CC76F00FF8C47 /* TwilioVoice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,18 +176,12 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TwilioVoice.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVoice.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Boostlingo.framework",
 			);
