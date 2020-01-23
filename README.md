@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.1.5'
+  pod 'BoostlingoSDK', '0.2.0'
 end
 ```
 
@@ -40,7 +40,7 @@ Then run `carthage bootstrap --cache-builds` (or `carthage update --cache-builds
 On your application targets’ “General” settings tab, in the “Linked Frameworks and Libraries” section, drag and drop each framework you want to use from the Carthage/Build folder on disk. For Boostlingo SDK you will need to link following frameworks:
 
 ```sh
-TwilioVoice.framework, Boostlingo.framework
+TwilioVoice.framework, TwilioVideo.framework, Boostlingo.framework
 ```
 
 On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase”. Create a Run Script in which you specify your shell (ex: `/bin/sh`), add the following contents to the script area below the shell:
@@ -53,6 +53,7 @@ Add the paths to the frameworks you want to use under “Input Files":
 
 ```sh
 $(SRCROOT)/Carthage/Build/iOS/TwilioVoice.framework
+$(SRCROOT)/Carthage/Build/iOS/TwilioVideo.framework
 $(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework
 ```
 
@@ -60,6 +61,7 @@ Add the paths to the copied frameworks to the “Output Files”:
 
 ```sh
 $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVoice.framework
+$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVideo.framework
 $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Boostlingo.framework
 ```
 
@@ -113,13 +115,12 @@ private let token = <TOKEN>
 We recommend you do this only once. The Boostlingo library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required. In this example we populate a series of select dropdown inputs.
 
 ```swift
-self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.error)
-self.boostlingo!.delegate = self
+self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.debug)
 self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
     guard let self = self else {
-    return
+        return
     }
-
+    
     if error == nil {
         self.languages = callDictionaries?.languages
         self.serviceTypes = callDictionaries?.serviceTypes
@@ -153,34 +154,89 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
 
 ```swift
 // MARK: - BLCallDelegate
-func callDidConnect(_ call: BLCall) {
-    self.call = call
-    swMute.isOn = call.isMuted
-    state = .inprogress(interpreterName: self.call?.interlocutorInfo?.requiredName)
+    func callDidConnect(_ call: BLCall) {
+        DispatchQueue.main.async {
+            self.call = call
+            self.callId = self.call?.callId
+            self.delegate?.callId = self.callId
+            self.swMute.isOn = call.isMuted
+            self.state = .inprogress(interpreterName: self.call?.interlocutorInfo?.requiredName)
+        }
+    }
+    
+    func callDidDisconnect(_ error: Error?) {
+        DispatchQueue.main.async {
+            self.call = nil
+            self.state = .nocall
+            let title = error != nil ? "Error" : "Info"
+            let message = error != nil ? "Call did disconnect with error: \(error!.localizedDescription)" : "Call did disconnect"
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
+                guard let self = self else {
+                    return
+                }
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func callDidFailToConnect(_ error: Error?) {
+        DispatchQueue.main.async {
+            self.call = nil
+            self.state = .nocall
+            let title = error != nil ? "Error" : "Info"
+            let message = error != nil ? "Call did fail to connect with error: \(error!.localizedDescription)" : "Call did fail to connect"
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
+                guard let self = self else {
+                    return
+                }
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+        }
+    }
+```
+
+### Implement BLVideoDelegate
+
+```swift
+// MARK: - BLVideoDelegate
+func remoteAudioEnabled() {
+    
 }
 
-func callDidDisconnect(_ error: Error?) {
-    self.call = nil
-    state = .authenticated
-    let title = error != nil ? "Error" : "Info"
-    let message = error != nil ? "Call did disconnect with error: \(error!.localizedDescription)" : "Call did disconnect"
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    self.present(alert, animated: true)
+func remoteAudioDisabled() {
+    
 }
 
-func callDidFailToConnect(_ error: Error?) {
-    self.call = nil
-    state = .authenticated
-    let title = error != nil ? "Error" : "Info"
-    let message = error != nil ? "Call did fail to connect with error: \(error!.localizedDescription)" : "Call did fail to connect"
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    self.present(alert, animated: true)
+func remoteVideoEnabled() {
+    
+}
+
+func remoteVideoDisabled() {
+    
+}
+
+func remoteAudioPublished() {
+    
+}
+
+func remoteAudioUnpublished() {
+    
+}
+
+func remoteVideoPublished() {
+    
+}
+
+func remoteVideoUnpublished() {
+    
 }
 ```
 
-### Placing a call
+### Placing a voice call
 
 Before placing a call you will need to check record permission:
 
@@ -212,21 +268,61 @@ private func checkRecordPermission(completion: @escaping (_ permissionGranted: B
 ```
 
 ```swift
-self.state = .loading
-self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender)) { [weak self] error in
+self.boostlingo!.delegate = self
+self.boostlingo!.makeVoiceCall(callRequest: callRequest!) { [weak self] error in
     guard let self = self else {
         return
     }
 
-    if let error = error {
-        self.state = .authenticated
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
+    DispatchQueue.main.async {
+        if let error = error {
+            self.state = .nocall
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+                guard let self = self else {
+                    return
+                }
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+
+        self.state = .calling
+    }
+}
+```
+
+### Placing a video call
+
+You don't have to check the camera permission, the sdk will do it by itself. But you will need to provide TVIVideoView container for the remote and local video tracks.
+
+```swift
+vRemoteVideo.contentMode = .scaleAspectFit
+vLocalVideo.contentMode = .scaleAspectFit
+self.boostlingo!.delegate = self
+self.boostlingo!.videoDelegate = self
+boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVideo, localVideoView: vLocalVideo) { [weak self] error in
+    guard let self = self else {
         return
     }
-
-    self.state = .calling
+    
+    DispatchQueue.main.async {
+        if let error = error {
+            self.state = .nocall
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+                guard let self = self else {
+                    return
+                }
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        
+        self.state = .calling
+    }
 }
 ```
 
@@ -235,6 +331,6 @@ self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selected
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.1.5/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.2.0/docs/index.html)
 
 

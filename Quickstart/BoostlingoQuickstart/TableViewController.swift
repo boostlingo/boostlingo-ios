@@ -9,7 +9,6 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    
     weak var delegate: ViewControllerDelegate?
     var data: [TableViewItem]?
     
@@ -38,6 +37,6 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.update(data![indexPath.item])
-        navigationController?.popViewController(animated: true);
+        navigationController?.popViewController(animated: true)
     }
 }

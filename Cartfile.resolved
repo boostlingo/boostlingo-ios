@@ -1,1 +1,2 @@
+github "twilio/twilio-video-ios" "3.1.0"
 github "twilio/twilio-voice-ios" "5.0.0"

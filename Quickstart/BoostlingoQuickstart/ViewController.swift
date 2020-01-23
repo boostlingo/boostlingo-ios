@@ -3,7 +3,7 @@
 //  boostlingo-ios
 //
 //  Created by Denis Kornev on 18/04/2019.
-//  Copyright © 2019 Boostlingo. All rights reserved.
+//  Copyright © 2020 Boostlingo. All rights reserved.
 //
 
 import UIKit
@@ -11,16 +11,15 @@ import Boostlingo
 import AVFoundation
 
 protocol ViewControllerDelegate : AnyObject {
+    var callId: Int? { get set }
     func update(_ item: TableViewItem)
 }
 
-class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
+class ViewController: UIViewController, ViewControllerDelegate {
     private enum State {
         case notAuthenticated
         case loading
         case authenticated
-        case calling
-        case inprogress(interpreterName: String?)
     }
     
     private enum TableViewType {
@@ -40,122 +39,60 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
         didSet {
             switch state {
             case .notAuthenticated:
-                DispatchQueue.main.async {
-                    self.tfRegion.isEnabled = false
-                    self.btnRegion.isEnabled = true
-                    self.btnSignIn.isEnabled = true
-                    self.tfToken.isEnabled = false
-                    self.tfLanguageFrom.isEnabled = false
-                    self.btnLanguageFrom.isEnabled = false
-                    self.tfLanguageTo.isEnabled = false
-                    self.btnLanguageTo.isEnabled = false
-                    self.tfServiceType.isEnabled = false
-                    self.btnServiceType.isEnabled = false
-                    self.tfGender.isEnabled = false
-                    self.btnGender.isEnabled = false
-                    self.btnCall.isEnabled = false
-                    self.lblCallStatus.isEnabled = false
-                    self.swMute.isEnabled = false
-                    self.swSpeaker.isEnabled = false
-                    self.btnHangUp.isEnabled = false
-                    self.lblCallStatus.text = "No active call"
-                    self.btnLastCallDetails.isEnabled = false
-                }
+                self.tfRegion.isEnabled = false
+                self.btnRegion.isEnabled = true
+                self.btnSignIn.isEnabled = true
+                self.tfToken.isEnabled = false
+                self.tfLanguageFrom.isEnabled = false
+                self.btnLanguageFrom.isEnabled = false
+                self.tfLanguageTo.isEnabled = false
+                self.btnLanguageTo.isEnabled = false
+                self.tfServiceType.isEnabled = false
+                self.btnServiceType.isEnabled = false
+                self.tfGender.isEnabled = false
+                self.btnGender.isEnabled = false
+                self.btnCall.isEnabled = false
+                self.btnVideoCall.isEnabled = false
+                self.btnLastCallDetails.isEnabled = false
             case .loading:
-                DispatchQueue.main.async {
-                    self.tfRegion.isEnabled = false
-                    self.btnRegion.isEnabled = false
-                    self.btnSignIn.isEnabled = false
-                    self.tfToken.isEnabled = false
-                    self.tfLanguageFrom.isEnabled = false
-                    self.btnLanguageFrom.isEnabled = false
-                    self.tfLanguageTo.isEnabled = false
-                    self.btnLanguageTo.isEnabled = false
-                    self.tfServiceType.isEnabled = false
-                    self.btnServiceType.isEnabled = false
-                    self.tfGender.isEnabled = false
-                    self.btnGender.isEnabled = false
-                    self.btnCall.isEnabled = false
-                    self.lblCallStatus.isEnabled = false
-                    self.swMute.isEnabled = false
-                    self.swSpeaker.isEnabled = false
-                    self.btnHangUp.isEnabled = false
-                    self.lblCallStatus.text = "Loading"
-                    self.btnLastCallDetails.isEnabled = false
-                }
+                self.tfRegion.isEnabled = false
+                self.btnRegion.isEnabled = false
+                self.btnSignIn.isEnabled = false
+                self.tfToken.isEnabled = false
+                self.tfLanguageFrom.isEnabled = false
+                self.btnLanguageFrom.isEnabled = false
+                self.tfLanguageTo.isEnabled = false
+                self.btnLanguageTo.isEnabled = false
+                self.tfServiceType.isEnabled = false
+                self.btnServiceType.isEnabled = false
+                self.tfGender.isEnabled = false
+                self.btnGender.isEnabled = false
+                self.btnCall.isEnabled = false
+                self.btnVideoCall.isEnabled = false
+                self.btnLastCallDetails.isEnabled = false
             case .authenticated:
-                DispatchQueue.main.async {
-                    self.tfRegion.isEnabled = false
-                    self.btnRegion.isEnabled = false
-                    self.btnSignIn.isEnabled = false
-                    self.tfToken.isEnabled = false
-                    self.tfLanguageFrom.isEnabled = false
-                    self.btnLanguageFrom.isEnabled = true
-                    self.tfLanguageTo.isEnabled = false
-                    self.btnLanguageTo.isEnabled = true
-                    self.tfServiceType.isEnabled = false
-                    self.btnServiceType.isEnabled = true
-                    self.tfGender.isEnabled = false
-                    self.btnGender.isEnabled = true
-                    self.btnCall.isEnabled = true
-                    self.lblCallStatus.isEnabled = false
-                    self.swMute.isEnabled = false
-                    self.swSpeaker.isEnabled = false
-                    self.btnHangUp.isEnabled = false
-                    self.lblCallStatus.text = "No active call"
-                    self.btnLastCallDetails.isEnabled = true
-                }
-            case .calling:
-                DispatchQueue.main.async {
-                    self.tfRegion.isEnabled = false
-                    self.btnRegion.isEnabled = false
-                    self.btnSignIn.isEnabled = false
-                    self.tfToken.isEnabled = false
-                    self.tfLanguageFrom.isEnabled = false
-                    self.btnLanguageFrom.isEnabled = false
-                    self.tfLanguageTo.isEnabled = false
-                    self.btnLanguageTo.isEnabled = false
-                    self.tfServiceType.isEnabled = false
-                    self.btnServiceType.isEnabled = false
-                    self.tfGender.isEnabled = false
-                    self.btnGender.isEnabled = false
-                    self.btnCall.isEnabled = false
-                    self.lblCallStatus.isEnabled = false
-                    self.swMute.isEnabled = false
-                    self.swSpeaker.isEnabled = false
-                    self.btnHangUp.isEnabled = true
-                    self.lblCallStatus.text = "Calling"
-                    self.btnLastCallDetails.isEnabled = false
-                }
-            case .inprogress(let interpreterName):
-                DispatchQueue.main.async {
-                    self.tfRegion.isEnabled = false
-                    self.btnRegion.isEnabled = false
-                    self.btnSignIn.isEnabled = false
-                    self.tfToken.isEnabled = false
-                    self.tfLanguageFrom.isEnabled = false
-                    self.btnLanguageFrom.isEnabled = false
-                    self.tfLanguageTo.isEnabled = false
-                    self.btnLanguageTo.isEnabled = false
-                    self.tfServiceType.isEnabled = false
-                    self.btnServiceType.isEnabled = false
-                    self.tfGender.isEnabled = false
-                    self.btnGender.isEnabled = false
-                    self.btnCall.isEnabled = false
-                    self.lblCallStatus.isEnabled = false
-                    self.swMute.isEnabled = true
-                    self.swSpeaker.isEnabled = true
-                    self.btnHangUp.isEnabled = true
-                    self.lblCallStatus.text = interpreterName == nil ? "Call in progress" : "Call in progress with \(interpreterName!)"
-                    self.btnLastCallDetails.isEnabled = false
-                }
+                self.tfRegion.isEnabled = false
+                self.btnRegion.isEnabled = false
+                self.btnSignIn.isEnabled = false
+                self.tfToken.isEnabled = false
+                self.tfLanguageFrom.isEnabled = false
+                self.btnLanguageFrom.isEnabled = true
+                self.tfLanguageTo.isEnabled = false
+                self.btnLanguageTo.isEnabled = true
+                self.tfServiceType.isEnabled = false
+                self.btnServiceType.isEnabled = true
+                self.tfGender.isEnabled = false
+                self.btnGender.isEnabled = true
+                self.btnCall.isEnabled = true
+                self.btnVideoCall.isEnabled = true
+                self.btnLastCallDetails.isEnabled = true
             }
         }
     }
     
-    private var call: BLCall?
     
-    // MAKR: - Fields
+    // MARK: - Fields
+    var callId: Int?
     private var boostlingo: Boostlingo?
     private var regions: [String] = []
     private var selectedRegion: String?
@@ -166,7 +103,7 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
     private var selectedServiceType: Int?
     private var genders: [Gender]?
     private var selectedGender: Int?
-    private var callId: Int?
+    private var call: BLCall?
     
     // MARK: - Outlets
     @IBOutlet weak var tfRegion: UITextField!
@@ -182,11 +119,8 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
     @IBOutlet weak var tfGender: UITextField!
     @IBOutlet weak var btnGender: UIButton!
     @IBOutlet weak var btnCall: UIButton!
-    @IBOutlet weak var lblCallStatus: UILabel!
-    @IBOutlet weak var swMute: UISwitch!
-    @IBOutlet weak var swSpeaker: UISwitch!
-    @IBOutlet weak var btnHangUp: UIButton!
     @IBOutlet weak var btnLastCallDetails: UIButton!
+    @IBOutlet weak var btnVideoCall: UIButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -195,7 +129,6 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
         selectedRegion = regions.first(where: { region -> Bool in
             return region == "qa"
         })
-        lblCallStatus.text = nil
         self.tfToken.text = self.token
         state = .notAuthenticated
         print("Boostlingo SDK version: \(Boostlingo.getVersion())")
@@ -317,39 +250,10 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
         }
     }
     
-    // MARK: - BLCallDelegate
-    func callDidConnect(_ call: BLCall) {
-        self.call = call
-        self.callId = self.call?.callId
-        swMute.isOn = call.isMuted
-        state = .inprogress(interpreterName: self.call?.interlocutorInfo?.requiredName)
-    }
-    
-    func callDidDisconnect(_ error: Error?) {
-        self.call = nil
-        state = .authenticated
-        let title = error != nil ? "Error" : "Info"
-        let message = error != nil ? "Call did disconnect with error: \(error!.localizedDescription)" : "Call did disconnect"
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    func callDidFailToConnect(_ error: Error?) {
-        self.call = nil
-        state = .authenticated
-        let title = error != nil ? "Error" : "Info"
-        let message = error != nil ? "Call did fail to connect with error: \(error!.localizedDescription)" : "Call did fail to connect"
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
     // MARK: - Actions
     @IBAction func btnSignInTouchUpInside(_ sender: Any) {
         state = .loading
         self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.debug)
-        self.boostlingo!.delegate = self
         self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
             guard let self = self else {
                 return
@@ -408,51 +312,26 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
                 
                 self.present(alertController, animated: true, completion: nil)
             } else {
-                self.state = .loading
-                self.boostlingo!.makeCall(callRequest: CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender)) { [weak self] error in
-                    guard let self = self else {
-                        return
-                    }
-                    
+                let callRequest = CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender, isVideo: false)
+                self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
+                    guard let self = self else { return }
+
                     if let error = error {
                         self.state = .authenticated
                         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                         self.present(alert, animated: true)
                         return
+                    } else {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "VoiceCallViewController") as! VoiceCallViewController
+                        controller.boostlingo = self.boostlingo
+                        controller.callRequest = callRequest
+                        controller.delegate = self
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
-                    
-                    self.state = .calling
                 }
             }
-        }
-    }
-    
-    @IBAction func swMuteValueChanged(_ sender: Any) {
-        if let call = call {
-            call.isMuted = swMute.isOn
-        }
-    }
-    
-    @IBAction func swSpeakerValueChanged(_ sender: Any) {
-        if call != nil {
-            self.boostlingo!.toggleAudioRoute(toSpeaker: swSpeaker.isOn)
-        }
-    }
-    
-    @IBAction func btnHangUpTouchUpInside(_ sender: Any) {
-        state = .loading
-        boostlingo!.hangUp() { [weak self] error in
-            guard let self = self else { return }
-            
-            if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
-                return
-            }
-            
-            self.state = .authenticated
         }
     }
     
@@ -464,7 +343,7 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
                 
                 if error == nil {
                     self.state = .authenticated
-                    let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec",preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec, CallId: \(callDetails?.callId)",preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
                 }
@@ -483,6 +362,28 @@ class ViewController: UIViewController, ViewControllerDelegate, BLCallDelegate {
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
                 }
+            }
+        }
+    }
+    
+    @IBAction func BtnVideoCallTouchUpInside(_ sender: Any) {
+        let callRequest = CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender, isVideo: true)
+        self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
+            guard let self = self else { return }
+
+            if let error = error {
+                self.state = .authenticated
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "VideoCallViewController") as! VideoCallViewController
+                controller.boostlingo = self.boostlingo
+                controller.callRequest = callRequest
+                controller.delegate = self
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         }
     }

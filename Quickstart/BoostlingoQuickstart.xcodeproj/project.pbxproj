@@ -26,10 +26,7 @@
 		8425C5B0227CC655008456E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8425C5B3227CC655008456E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8425C5B5227CC655008456E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84622B0D227CC76000FF8C47 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		84622B0F227CC76300FF8C47 /* Boostlingo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Boostlingo.framework; path = Carthage/Build/iOS/Boostlingo.framework; sourceTree = "<group>"; };
-		84622B11227CC76600FF8C47 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
-		84622B13227CC76900FF8C47 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		84622B15227CC76E00FF8C47 /* TwilioVoice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwilioVoice.framework; path = Carthage/Build/iOS/TwilioVoice.framework; sourceTree = "<group>"; };
 		84622B18227CC82900FF8C47 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		84622B1B227CC82F00FF8C47 /* TableViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewItem.swift; sourceTree = "<group>"; };
@@ -84,10 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				84622B15227CC76E00FF8C47 /* TwilioVoice.framework */,
-				84622B13227CC76900FF8C47 /* Result.framework */,
-				84622B11227CC76600FF8C47 /* Moya.framework */,
 				84622B0F227CC76300FF8C47 /* Boostlingo.framework */,
-				84622B0D227CC76000FF8C47 /* Alamofire.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,12 +172,14 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/TwilioVoice.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TwilioVideo.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVoice.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Boostlingo.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVideo.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -352,7 +348,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,7 +371,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
