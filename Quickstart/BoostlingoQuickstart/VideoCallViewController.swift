@@ -46,7 +46,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
     var callRequest: CallRequest?
     var boostlingo: Boostlingo?
     private var callId: Int?
-    private var call: BLCall?
+    private var call: BLVideoCall?
     
     // MARK: - Outlets
     @IBOutlet weak var lblCallStatus: UILabel!
@@ -62,9 +62,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         vRemoteVideo.contentMode = .scaleAspectFit
         vLocalVideo.contentMode = .scaleAspectFit
-        self.boostlingo!.delegate = self
-        self.boostlingo!.videoDelegate = self
-        self.boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVideo, localVideoView: vLocalVideo) { [weak self] error in
+        self.boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVideo, localVideoView: vLocalVideo, delegate: self, videoDelegate: self) { [weak self] call, error in
             guard let self = self else {
                 return
             }
@@ -83,6 +81,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
                     return
                 }
                 
+                self.call = call
                 self.state = .calling
             }
         }
@@ -91,12 +90,13 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
     override func viewDidDisappear(_ animated: Bool) {
         delegate = nil
         boostlingo = nil
+        call = nil
     }
     
     // MARK: - BLCallDelegate
     func callDidConnect(_ call: BLCall) {
         DispatchQueue.main.async {
-            self.call = call
+            self.call = call as? BLVideoCall
             self.callId = self.call?.callId
             self.delegate?.callId = self.callId
             if call.isMuted {

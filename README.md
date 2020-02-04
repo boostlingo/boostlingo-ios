@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.2.1'
+  pod 'BoostlingoSDK', '0.2.2'
 end
 ```
 
@@ -331,6 +331,6 @@ boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVid
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.2.1/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.2.2/docs/index.html)
 
 

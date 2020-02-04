@@ -1,12 +1,12 @@
 PODS:
-  - BoostlingoSDK (0.2.1):
+  - BoostlingoSDK (0.2.2):
     - TwilioVideo (~> 3.1.0)
     - TwilioVoice (~> 5.0.0)
   - TwilioVideo (3.1.0)
   - TwilioVoice (5.0.0)
 
 DEPENDENCIES:
-  - BoostlingoSDK (= 0.2.0)
+  - BoostlingoSDK (= 0.2.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:

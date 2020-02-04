@@ -48,7 +48,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
     var callRequest: CallRequest?
     var boostlingo: Boostlingo?
     private var callId: Int?
-    private var call: BLCall?
+    private var call: BLVoiceCall?
     
     // MARK: - Outlets
     @IBOutlet weak var lblCallStatus: UILabel!
@@ -60,8 +60,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.boostlingo!.delegate = self
-        self.boostlingo!.makeVoiceCall(callRequest: callRequest!) { [weak self] error in
+        self.boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
             guard let self = self else {
                 return
             }
@@ -79,7 +78,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
                     self.present(alert, animated: true)
                     return
                 }
-
+                self.call = call
                 self.state = .calling
             }
         }
@@ -88,12 +87,13 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         delegate = nil
         boostlingo = nil
+        call = nil
     }
     
     // MARK: - BLCallDelegate
     func callDidConnect(_ call: BLCall) {
         DispatchQueue.main.async {
-            self.call = call
+            self.call = call as? BLVoiceCall
             self.callId = self.call?.callId
             self.delegate?.callId = self.callId
             self.swMute.isOn = call.isMuted

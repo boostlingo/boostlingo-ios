@@ -30,7 +30,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
         case gender
     }
     
-    private let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMSIsImVtYWlsIjoia2R2OTBAbWFpbC5ydSIsInVuaXF1ZV9uYW1lIjoia2R2OTBAbWFpbC5ydSIsInJvbGUiOiJDb3Jwb3JhdGVDbGllbnRSb290QWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiVXNlcklkXCI6MTEsXCJVc2VyQWNjb3VudElkXCI6MTEsXCJBZG1pbkNvbXBhbnlJZFwiOjksXCJNYXN0ZXJDb21wYW55SWRcIjo4LFwiQ3VycmVudENvbXBhbnlJZFwiOjl9IiwiY3JlYXRlZCI6IjA1LzAyLzIwMTkgMjE6MjI6MTMiLCJuYmYiOjE1NTY4MzIxMzMsImV4cCI6MTU4ODQ1NDUzMywiaWF0IjoxNTU2ODMyMTMzLCJpc3MiOiJCb29zdGxpbmdvIiwiYXVkIjoiVXNlcnMifQ.MA2TPDtpZZgiqGINxQlRbsb1ReEwGl7dIrskfhRMa3BWdEsdJwC4hbTIowLdeDm8wkUpvkicupyHGf_0IY-i9MRAgAs_ohxoEk-nY29g0FbT1xXzc0crVdE_2jGHcfUBGTFmCj1-Ok6aK8hqFbYceWvDgfEQa-3IP9YFqgg0Ahu8pxP-oI7mi4TubabGMre_KSKWKUeP_Q89x72WMtFuf06sfQJP9lBP50mQ19Ho_HplwjFAzCPp6MuPn__MjHSjkkPXOwTqtLeHD4izyQTkvJ2URSj3BgRgn1qiWZoTlRyIR4PVnArToQSlduqBaPXKiRWa20BeJZb6b9iHYpp9bA"
+    private let token = <TOKEN>
     
     private var tableViewType: TableViewType?
     
@@ -316,19 +316,21 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
                     guard let self = self else { return }
 
-                    if let error = error {
-                        self.state = .authenticated
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                        return
-                    } else {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let controller = storyboard.instantiateViewController(withIdentifier: "VoiceCallViewController") as! VoiceCallViewController
-                        controller.boostlingo = self.boostlingo
-                        controller.callRequest = callRequest
-                        controller.delegate = self
-                        self.navigationController?.pushViewController(controller, animated: true)
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            self.state = .authenticated
+                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            self.present(alert, animated: true)
+                            return
+                        } else {
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let controller = storyboard.instantiateViewController(withIdentifier: "VoiceCallViewController") as! VoiceCallViewController
+                            controller.boostlingo = self.boostlingo
+                            controller.callRequest = callRequest
+                            controller.delegate = self
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                 }
             }
@@ -341,26 +343,28 @@ class ViewController: UIViewController, ViewControllerDelegate {
             self.boostlingo!.getCallDetails(callId: callId) { [weak self] (callDetails, error) in
                 guard let self = self else { return }
                 
-                if error == nil {
-                    self.state = .authenticated
-                    let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec, CallId: \(callDetails?.callId)",preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                }
-                else {
-                    self.state = .authenticated
-                    let message: String
-                    switch error! {
-                    case BLError.apiCall(_, let statusCode):
-                        message = "\(error!.localizedDescription), statusCode: \(statusCode)"
-                        break
-                    default:
-                        message = error!.localizedDescription
-                        break
+                DispatchQueue.main.async {
+                    if error == nil {
+                        self.state = .authenticated
+                        let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec, CallId: \(callDetails?.callId)",preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
                     }
-                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
+                    else {
+                        self.state = .authenticated
+                        let message: String
+                        switch error! {
+                        case BLError.apiCall(_, let statusCode):
+                            message = "\(error!.localizedDescription), statusCode: \(statusCode)"
+                            break
+                        default:
+                            message = error!.localizedDescription
+                            break
+                        }
+                        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
+                    }
                 }
             }
         }
