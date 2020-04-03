@@ -10,7 +10,7 @@ import Foundation
 import Boostlingo
 import UIKit
 
-class VoiceCallViewController: UIViewController, BLCallDelegate {
+class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate {
     private enum State {
           case nocall
           case calling
@@ -60,6 +60,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.boostlingo!.chatDelegate = self
         self.boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
             guard let self = self else {
                 return
@@ -135,7 +136,42 @@ class VoiceCallViewController: UIViewController, BLCallDelegate {
         }
     }
     
+    // MARK: - BLChatDelegate
+    func chatConnected() {
+        
+    }
+    
+    func chatDisconnected() {
+        
+    }
+    
+    func chatMessageRecieved(message: ChatMessage) {
+        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
     // MARK: - Actions
+    @IBAction func btnSendMessageTouchUpInside(_ sender: Any) {
+        boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                     self.present(alert, animated: true)
+                     return
+                }
+            }
+        }
+    }
+    
     @IBAction func btnHangUpTouchUpInside(_ sender: Any) {
         state = .nocall
         boostlingo!.hangUp() { [weak self] error in

@@ -254,23 +254,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func btnSignInTouchUpInside(_ sender: Any) {
         state = .loading
         self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.debug)
-        self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
+        self.boostlingo!.initialize() { [weak self] error in
             guard let self = self else {
                 return
             }
             
-            if error == nil {
-                self.languages = callDictionaries?.languages
-                self.serviceTypes = callDictionaries?.serviceTypes
-                self.genders = callDictionaries?.genders
-                self.selectedLanguageFrom = self.languages?.first(where: { item -> Bool in return item.id == 4 })?.id
-                self.selectedLanguageTo = self.languages?.first(where: { item -> Bool in return item.id == 1 })?.id
-                self.selectedServiceType = self.serviceTypes?.first(where: { item -> Bool in return item.id == 1 })?.id
-                self.selectedGender = self.genders?.first?.id
-                self.updateUI()
-                self.state = .authenticated
-            }
-            else {
+            guard error == nil else {
                 self.state = .notAuthenticated
                 let message: String
                 switch error! {
@@ -284,6 +273,40 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alert, animated: true)
+                return
+            }
+            
+            self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
+                guard let self = self else {
+                    return
+                }
+                
+                if error == nil {
+                    self.languages = callDictionaries?.languages
+                    self.serviceTypes = callDictionaries?.serviceTypes
+                    self.genders = callDictionaries?.genders
+                    self.selectedLanguageFrom = self.languages?.first(where: { item -> Bool in return item.id == 4 })?.id
+                    self.selectedLanguageTo = self.languages?.first(where: { item -> Bool in return item.id == 1 })?.id
+                    self.selectedServiceType = self.serviceTypes?.first(where: { item -> Bool in return item.id == 1 })?.id
+                    self.selectedGender = self.genders?.first?.id
+                    self.updateUI()
+                    self.state = .authenticated
+                }
+                else {
+                    self.state = .notAuthenticated
+                    let message: String
+                    switch error! {
+                    case BLError.apiCall(_, let statusCode):
+                        message = "\(error!.localizedDescription), statusCode: \(statusCode)"
+                        break
+                    default:
+                        message = error!.localizedDescription
+                        break
+                    }
+                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ import Boostlingo
 import UIKit
 import TwilioVideo
 
-class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate {
+class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate, BLChatDelegate {
     private enum State {
           case nocall
           case calling
@@ -62,6 +62,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         vRemoteVideo.contentMode = .scaleAspectFit
         vLocalVideo.contentMode = .scaleAspectFit
+        boostlingo!.chatDelegate = self
         self.boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVideo, localVideoView: vLocalVideo, delegate: self, videoDelegate: self) { [weak self] call, error in
             guard let self = self else {
                 return
@@ -142,6 +143,21 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
         }
     }
     
+    // MARK: - BLChatDelegate
+    func chatConnected() {
+        
+    }
+    
+    func chatDisconnected() {
+        
+    }
+    
+    func chatMessageRecieved(message: ChatMessage) {
+        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
     // MARK: - BLVideoDelegate
     func remoteAudioEnabled() {
         
@@ -156,7 +172,9 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
     }
     
     func remoteVideoDisabled() {
-        
+        // TODO: Interpreter has disabled the video. Show you privacy screen here
+        // Get the interpreter profile image URL
+        // let url = call?.interlocutorInfo?.imageInfo?.url(size: nil)
     }
     
     func remoteAudioPublished() {
@@ -176,6 +194,37 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
     }
     
     // MARK: - Actions
+    @IBAction func btnPrivacyTouchUpInside(_ sender: Any) {
+        if let call = call {
+            call.isVideoEnabled = !call.isVideoEnabled
+        }
+        // TODO: Show you privacy screen here
+//        boostlingo!.getProfile() { profile, error in
+//            // Get the requestor profile URL
+//            let url = profile?.imageInfo?.url(size: 64)
+//        }
+    }
+        
+    @IBAction func btnSendMessageTouchUpInside(_ sender: Any) {
+        boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                     self.present(alert, animated: true)
+                     return
+                }
+            }
+        }
+    }
+    
     @IBAction func btnHangUpTouchUpInside(_ sender: Any) {
         state = .nocall
         boostlingo!.hangUp() { [weak self] error in

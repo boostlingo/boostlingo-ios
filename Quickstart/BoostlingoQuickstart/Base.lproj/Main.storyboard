@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="11W-s3-Jnt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="11W-s3-Jnt">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -372,6 +372,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EL1-vR-ZTS">
+                                <rect key="frame" x="140" y="794" width="134" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="LHA-JK-zei"/>
+                                    <constraint firstAttribute="height" constant="30" id="UlT-9D-LmI"/>
+                                </constraints>
+                                <state key="normal" title="Send Test Message"/>
+                                <connections>
+                                    <action selector="btnSendMessageTouchUpInside:" destination="rEr-P6-SGA" eventType="touchUpInside" id="J97-jp-fTi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEo-1n-l2D">
+                                <rect key="frame" x="16" y="794" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tk1-it-gwE"/>
+                                </constraints>
+                                <state key="normal" title="Privacy"/>
+                                <connections>
+                                    <action selector="btnPrivacyTouchUpInside:" destination="rEr-P6-SGA" eventType="touchUpInside" id="pDE-OO-mXM"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vj3-FF-DzV">
                                 <rect key="frame" x="176.5" y="832" width="61" height="30"/>
                                 <constraints>
@@ -412,16 +433,21 @@
                             <constraint firstItem="fbt-Ji-Xnu" firstAttribute="trailing" secondItem="tdq-Jy-Aes" secondAttribute="trailing" constant="16" id="Klb-eE-zEe"/>
                             <constraint firstItem="fbt-Ji-Xnu" firstAttribute="trailing" secondItem="vka-dW-ZnX" secondAttribute="trailing" constant="16" id="LUU-iF-10E"/>
                             <constraint firstItem="T9l-jo-inR" firstAttribute="top" secondItem="vka-dW-ZnX" secondAttribute="bottom" constant="8" id="Otx-I4-bGe"/>
+                            <constraint firstItem="p1G-2V-PVN" firstAttribute="top" secondItem="WEo-1n-l2D" secondAttribute="bottom" constant="8" id="WC8-CH-QIH"/>
                             <constraint firstItem="vj3-FF-DzV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p1G-2V-PVN" secondAttribute="trailing" constant="8" symbolic="YES" id="WOR-y5-m7e"/>
                             <constraint firstItem="Uv7-Sg-bf5" firstAttribute="leading" secondItem="fbt-Ji-Xnu" secondAttribute="leading" id="aEA-BR-9qE"/>
+                            <constraint firstItem="WEo-1n-l2D" firstAttribute="leading" secondItem="fbt-Ji-Xnu" secondAttribute="leading" constant="16" id="b0v-Id-d5s"/>
                             <constraint firstItem="Uv7-Sg-bf5" firstAttribute="top" secondItem="XZ8-Cu-lsH" secondAttribute="top" constant="20" symbolic="YES" id="c2J-5O-5Q1"/>
                             <constraint firstItem="vj3-FF-DzV" firstAttribute="centerX" secondItem="XZ8-Cu-lsH" secondAttribute="centerX" id="dn3-mD-KkE"/>
+                            <constraint firstItem="vj3-FF-DzV" firstAttribute="top" secondItem="EL1-vR-ZTS" secondAttribute="bottom" constant="8" id="dof-0r-vHX"/>
+                            <constraint firstItem="EL1-vR-ZTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WEo-1n-l2D" secondAttribute="trailing" constant="16" id="gza-5a-HQC"/>
                             <constraint firstItem="p1G-2V-PVN" firstAttribute="leading" secondItem="fbt-Ji-Xnu" secondAttribute="leading" constant="16" id="hoU-oU-u5E"/>
                             <constraint firstItem="tdq-Jy-Aes" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vj3-FF-DzV" secondAttribute="trailing" constant="8" symbolic="YES" id="ijd-7T-yJ0"/>
                             <constraint firstItem="vj3-FF-DzV" firstAttribute="bottom" secondItem="fbt-Ji-Xnu" secondAttribute="bottom" id="mh5-je-Gdx"/>
                             <constraint firstItem="p1G-2V-PVN" firstAttribute="bottom" secondItem="fbt-Ji-Xnu" secondAttribute="bottom" id="rHX-I7-beV"/>
                             <constraint firstAttribute="bottom" secondItem="Uv7-Sg-bf5" secondAttribute="bottom" constant="20" symbolic="YES" id="rvX-uP-PUO"/>
                             <constraint firstItem="tdq-Jy-Aes" firstAttribute="bottom" secondItem="fbt-Ji-Xnu" secondAttribute="bottom" id="tfG-sl-CnD"/>
+                            <constraint firstItem="EL1-vR-ZTS" firstAttribute="centerX" secondItem="XZ8-Cu-lsH" secondAttribute="centerX" id="yS2-8J-bAy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fbt-Ji-Xnu"/>
                     </view>
@@ -507,6 +533,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSk-S9-hAV">
+                                <rect key="frame" x="140" y="794" width="134" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4Mm-wI-ZVB"/>
+                                </constraints>
+                                <state key="normal" title="Send Test Message"/>
+                                <connections>
+                                    <action selector="btnSendMessageTouchUpInside:" destination="a9w-5r-zZX" eventType="touchUpInside" id="mpb-ZX-ybg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -515,12 +551,14 @@
                             <constraint firstItem="08G-ag-qfr" firstAttribute="leading" secondItem="QnF-fI-sOu" secondAttribute="leading" constant="16" id="HKv-RS-hli"/>
                             <constraint firstItem="sEO-Bu-72X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cki-wu-56E" secondAttribute="trailing" constant="8" symbolic="YES" id="M3A-sr-AMb"/>
                             <constraint firstItem="QUH-ap-vAP" firstAttribute="centerY" secondItem="7n6-HD-3wL" secondAttribute="centerY" id="OHA-Y2-GVf"/>
+                            <constraint firstItem="3Xt-Qd-gtF" firstAttribute="top" secondItem="iSk-S9-hAV" secondAttribute="bottom" constant="8" id="Sfx-8R-PQi"/>
                             <constraint firstItem="7fB-4D-EE7" firstAttribute="leading" secondItem="QnF-fI-sOu" secondAttribute="leading" constant="16" id="UXz-Zk-Sjz"/>
                             <constraint firstItem="3Xt-Qd-gtF" firstAttribute="centerX" secondItem="7n6-HD-3wL" secondAttribute="centerX" id="V3e-ai-l4o"/>
                             <constraint firstItem="Cki-wu-56E" firstAttribute="centerY" secondItem="7n6-HD-3wL" secondAttribute="centerY" id="YPp-eh-V4j"/>
                             <constraint firstItem="Cki-wu-56E" firstAttribute="leading" secondItem="08G-ag-qfr" secondAttribute="trailing" constant="8" id="Z4R-Hq-Rjm"/>
                             <constraint firstItem="08G-ag-qfr" firstAttribute="centerY" secondItem="7n6-HD-3wL" secondAttribute="centerY" id="aSp-Xs-3sm"/>
                             <constraint firstItem="QUH-ap-vAP" firstAttribute="leading" secondItem="sEO-Bu-72X" secondAttribute="trailing" constant="8" id="aly-qi-mz5"/>
+                            <constraint firstItem="iSk-S9-hAV" firstAttribute="centerX" secondItem="7n6-HD-3wL" secondAttribute="centerX" id="fAz-fE-4SN"/>
                             <constraint firstItem="QnF-fI-sOu" firstAttribute="trailing" secondItem="QUH-ap-vAP" secondAttribute="trailing" constant="16" id="h9K-Us-koZ"/>
                             <constraint firstItem="QnF-fI-sOu" firstAttribute="trailing" secondItem="7fB-4D-EE7" secondAttribute="trailing" constant="16" id="rGL-q6-NQY"/>
                             <constraint firstItem="3Xt-Qd-gtF" firstAttribute="bottom" secondItem="QnF-fI-sOu" secondAttribute="bottom" id="xto-s3-hID"/>

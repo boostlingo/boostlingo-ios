@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.2.2'
+  pod 'BoostlingoSDK', '0.3.0'
 end
 ```
 
@@ -326,11 +326,76 @@ boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVid
 }
 ```
 
+### Using the chat functionality
+
+Subscribe for the chat related callback using _BLChatDelegate_.
+
+```swift
+boostlingo!.chatDelegate = self
+```
+
+```swift
+// MARK: - BLChatDelegate
+func chatConnected() {
+    
+}
+
+func chatDisconnected() {
+    
+}
+
+func chatMessageRecieved(message: ChatMessage) {
+    let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    present(alert, animated: true)
+}
+```
+
+Sending messages.
+
+```swift
+boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
+    guard let self = self else { return }
+    
+    DispatchQueue.main.async {
+        if let error = error {
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+            return
+        } else {
+            let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
+        }
+    }
+}
+```
+
+### Geting profile image URL
+
+Getting requestor profile image url.
+
+```swift
+boostlingo!.getProfile() { profile, error in
+    // Get the requestor profile URL
+    let url = profile?.imageInfo?.url(size: 64)
+}
+```
+
+Getting interpreter profile image url from _BLCall_.
+
+```swift
+// Get the interpreter profile image URL
+let url = call?.interlocutorInfo?.imageInfo?.url(size: nil)
+```
+
 ## More Documentation
 
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.2.2/docs/index.html)
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.3.0/docs/index.html)
 
 
