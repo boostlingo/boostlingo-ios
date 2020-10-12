@@ -4,5 +4,5 @@ target 'BoostlingoQuickstart' do
   platform :ios, '11.0'
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.4.2'
+  pod 'BoostlingoSDK', '0.5.0'
 end
