@@ -1,2 +1,2 @@
-binary "https://raw.githubusercontent.com/twilio/twilio-voice-ios/Releases/twilio-voice-ios.json" "6.0.0"
-github "twilio/twilio-video-ios" "3.7.1"
+binary "https://raw.githubusercontent.com/twilio/twilio-voice-ios/Releases/twilio-voice-ios.json" "6.0.2"
+github "twilio/twilio-video-ios" "3.7.2"
