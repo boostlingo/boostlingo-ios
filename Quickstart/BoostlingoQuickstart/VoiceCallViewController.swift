@@ -11,7 +11,9 @@ import Boostlingo
 import UIKit
 
 class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate {
+    
     private enum State {
+        
           case nocall
           case calling
           case inprogress(interpreterName: String?)
@@ -46,7 +48,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     // MARK: - Fields
     weak var delegate: ViewControllerDelegate?
     var callRequest: CallRequest?
-    var boostlingo: Boostlingo?
+    var boostlingo: BoostlingoSDK?
     private var callId: Int?
     private var call: BLVoiceCall?
     

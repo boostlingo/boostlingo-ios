@@ -12,7 +12,9 @@ import UIKit
 import TwilioVideo
 
 class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate, BLChatDelegate {
+    
     private enum State {
+        
           case nocall
           case calling
           case inprogress(interpreterName: String?)
@@ -44,7 +46,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLVideoDelegate
     // MARK: - Fields
     weak var delegate: ViewControllerDelegate?
     var callRequest: CallRequest?
-    var boostlingo: Boostlingo?
+    var boostlingo: BoostlingoSDK?
     private var callId: Int?
     private var call: BLVideoCall?
     

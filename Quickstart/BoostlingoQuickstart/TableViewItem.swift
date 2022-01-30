@@ -9,6 +9,7 @@
 import Foundation
 
 struct TableViewItem {
+    
     let value: String
     let text: String
 }

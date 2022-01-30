@@ -18,52 +18,11 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.5.1'
+  pod 'BoostlingoSDK', '0.5.10'
 end
 ```
 
 Then run `pod install --verbose` to install the dependencies to your project.
-
-### Cartfile
-
-The Boostlingo iOS framework can be installed using [Cartfile](https://github.com/Carthage/Carthage).
-You can add Boostlingo SDK for iOS by adding the following line to your Cartfile:
-
-```sh
-github "boostlingo/boostlingo-ios"
-```
-
-> NOTE: At this time, Carthage does not provide a way to build only specific repository submodules. All submodules and their dependencies will be built with the above command. However, you don't need to copy frameworks you aren't using into your project. Due to that first build of Carthage dependencies may take long time.
-
-Then run `carthage bootstrap --cache-builds` (or `carthage update --cache-builds` if you are updating your SDKs).
-
-On your application targets’ “General” settings tab, in the “Linked Frameworks and Libraries” section, drag and drop each framework you want to use from the Carthage/Build folder on disk. For Boostlingo SDK you will need to link following frameworks:
-
-```sh
-TwilioVoice.framework, TwilioVideo.framework, Boostlingo.framework
-```
-
-On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase”. Create a Run Script in which you specify your shell (ex: `/bin/sh`), add the following contents to the script area below the shell:
-
-```sh
-/usr/local/bin/carthage copy-frameworks
-```
-
-Add the paths to the frameworks you want to use under “Input Files":
-
-```sh
-$(SRCROOT)/Carthage/Build/iOS/TwilioVoice.framework
-$(SRCROOT)/Carthage/Build/iOS/TwilioVideo.framework
-$(SRCROOT)/Carthage/Build/iOS/Boostlingo.framework
-```
-
-Add the paths to the copied frameworks to the “Output Files”:
-
-```sh
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVoice.framework
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TwilioVideo.framework
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Boostlingo.framework
-```
 
 ## Usage
 
@@ -103,7 +62,7 @@ Response Model
 ### Quickstart
 
 This is a working example that will demonstrate how to Boostlingo calls.
-Now let’s go to the Quickstart folder. Then run `carthage update --cache-builds` to download and build dependencies.
+Now let’s go to the Quickstart folder. Then run `pod install --verbose` to download and build dependencies.
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
@@ -115,7 +74,8 @@ private let token = <TOKEN>
 We recommend you do this only once. The Boostlingo library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required. In this example we populate a series of select dropdown inputs.
 
 ```swift
-self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.debug)
+// For debug builds use BLPrintLogger() or your custom logger
+self.boostlingo = BoostlingoSDK(authToken: self.token, region: self.selectedRegion!, logger: BLNullLogger())
 self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
     guard let self = self else {
         return
@@ -245,15 +205,15 @@ private func checkRecordPermission(completion: @escaping (_ permissionGranted: B
     let permissionStatus: AVAudioSession.RecordPermission = AVAudioSession.sharedInstance().recordPermission
 
     switch permissionStatus {
-    case AVAudioSessionRecordPermission.granted:
+    case .granted:
         // Record permission already granted.
         completion(true)
         break
-    case AVAudioSessionRecordPermission.denied:
+    case .denied:
         // Record permission denied.
         completion(false)
         break
-    case AVAudioSessionRecordPermission.undetermined:
+    case .undetermined:
         // Requesting record permission.
         // Optional: pop up app dialog to let the users know if they want to request.
         AVAudioSession.sharedInstance().requestRecordPermission({ (granted) in

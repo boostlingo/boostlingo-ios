@@ -11,18 +11,22 @@ import Boostlingo
 import AVFoundation
 
 protocol ViewControllerDelegate : AnyObject {
+    
     var callId: Int? { get set }
     func update(_ item: TableViewItem)
 }
 
 class ViewController: UIViewController, ViewControllerDelegate {
+    
     private enum State {
+        
         case notAuthenticated
         case loading
         case authenticated
     }
     
     private enum TableViewType {
+        
         case region
         case languageFrom
         case languageTo
@@ -93,7 +97,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     // MARK: - Fields
     var callId: Int?
-    private var boostlingo: Boostlingo?
+    private var boostlingo: BoostlingoSDK?
     private var regions: [String] = []
     private var selectedRegion: String?
     private var languages: [Language]?
@@ -125,13 +129,13 @@ class ViewController: UIViewController, ViewControllerDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        regions = Boostlingo.getRegions()
+        regions = BoostlingoSDK.getRegions()
         selectedRegion = regions.first(where: { region -> Bool in
             return region == "qa"
         })
         self.tfToken.text = self.token
         state = .notAuthenticated
-        print("Boostlingo SDK version: \(Boostlingo.getVersion())")
+        print("Boostlingo SDK version: \(BoostlingoSDK.getVersion())")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -229,15 +233,15 @@ class ViewController: UIViewController, ViewControllerDelegate {
         let permissionStatus: AVAudioSession.RecordPermission = AVAudioSession.sharedInstance().recordPermission
         
         switch permissionStatus {
-        case AVAudioSessionRecordPermission.granted:
+        case .granted:
             // Record permission already granted.
             completion(true)
             break
-        case AVAudioSessionRecordPermission.denied:
+        case .denied:
             // Record permission denied.
             completion(false)
             break
-        case AVAudioSessionRecordPermission.undetermined:
+        case .undetermined:
             // Requesting record permission.
             // Optional: pop up app dialog to let the users know if they want to request.
             AVAudioSession.sharedInstance().requestRecordPermission({ (granted) in
@@ -253,7 +257,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
     // MARK: - Actions
     @IBAction func btnSignInTouchUpInside(_ sender: Any) {
         state = .loading
-        self.boostlingo = Boostlingo(authToken: self.token, region: self.selectedRegion!, logLevel: BLLogLevel.debug)
+        // For production builds use BLNullLogger() or your custom logger
+        self.boostlingo = BoostlingoSDK(authToken: self.token, region: self.selectedRegion!, logger: BLNullLogger())
         self.boostlingo!.initialize() { [weak self] error in
             guard let self = self else {
                 return
@@ -369,7 +374,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 DispatchQueue.main.async {
                     if error == nil {
                         self.state = .authenticated
-                        let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec, CallId: \(callDetails?.callId)",preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Info", message: "Call duration: \(String(describing: callDetails?.duration)) sec, CallId: \(callDetails?.callId ?? 0)",preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                         self.present(alert, animated: true)
                     }
