@@ -18,14 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.5.10'
-end
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-    end
+  pod 'BoostlingoSDK', '1.0.0'
 end
 ```
 
@@ -41,7 +34,7 @@ First step is to obtain a boostlingo authentication token from your server.  Nev
 
 ### Obtain Boostlingo authentication token via API endpoint
 
-```
+```json
 POST https://app.boostlingo.com/api/web/account/signin
 ```
 
@@ -60,6 +53,7 @@ Response Model
 ```json
 {
 "userAccountId": "<integer>",
+"refreshToken": "<string>",
 "role": "<string>",
 "token": "<string>",
 "companyAccountId": "<integer>"
@@ -69,7 +63,7 @@ Response Model
 ### Quickstart
 
 This is a working example that will demonstrate how to Boostlingo calls.
-Now let’s go to the Quickstart folder. Then run `pod install --verbose` to download and build dependencies.
+Now let's go to the Quickstart folder. Then run `pod install --verbose` to download and build dependencies.
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
@@ -121,9 +115,9 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
 
 ```swift
 // MARK: - BLCallDelegate
-    func callDidConnect(_ call: BLCall) {
+    func callDidConnect(_ call: BLCall, participants: [BLParticipant]) {
         DispatchQueue.main.async {
-            self.call = call
+            self.call = call as? BLVoiceCall
             self.callId = self.call?.callId
             self.delegate?.callId = self.callId
             self.swMute.isOn = call.isMuted
@@ -164,43 +158,31 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
             self.present(alert, animated: true)
         }
     }
-```
-
-### Implement BLVideoDelegate
-
-```swift
-// MARK: - BLVideoDelegate
-func remoteAudioEnabled() {
     
-}
-
-func remoteAudioDisabled() {
+    func callParticipantConnected(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
     
-}
-
-func remoteVideoEnabled() {
+    func callParticipantUpdated(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
     
-}
-
-func remoteVideoDisabled() {
+    func callParticipantDisconnected(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
     
-}
-
-func remoteAudioPublished() {
-    
-}
-
-func remoteAudioUnpublished() {
-    
-}
-
-func remoteVideoPublished() {
-    
-}
-
-func remoteVideoUnpublished() {
-    
-}
+    private func printParticipant(_ participant: BLParticipant) {
+        print("identity: \(participant.identity), isAudioEnabled: \(participant.isAudioEnabled), isVideoEnabled: \(participant.isVideoEnabled), muteActionIsEnabled: \(participant.muteActionIsEnabled), removeActionIsEnabled: \(participant.removeActionIsEnabled), requiredName: \(participant.requiredName), participantType: \(participant.participantType), rating: \(String(describing: participant.rating)), companyName: \(String(describing: participant.companyName)), state: \(participant.state)")
+    }
 ```
 
 ### Placing a voice call
@@ -267,9 +249,7 @@ You don't have to check the camera permission, the sdk will do it by itself. But
 ```swift
 vRemoteVideo.contentMode = .scaleAspectFit
 vLocalVideo.contentMode = .scaleAspectFit
-self.boostlingo!.delegate = self
-self.boostlingo!.videoDelegate = self
-boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVideo, localVideoView: vLocalVideo) { [weak self] error in
+boostlingo!.makeVideoCall(callRequest: callRequest!, localVideoView: vLocalVideo, delegate: self)  { [weak self] error in
     guard let self = self else {
         return
     }
@@ -291,6 +271,9 @@ boostlingo!.makeVideoCall(callRequest: callRequest!, remoteVideoView: vRemoteVid
         self.state = .calling
     }
 }
+
+// Adding a renderer for a participant
+call.addRenderer(for: participant.identity, renderer: self.vRemoteVideo)
 ```
 
 ### Using the chat functionality
@@ -351,11 +334,11 @@ boostlingo!.getProfile() { profile, error in
 }
 ```
 
-Getting interpreter profile image url from _BLCall_.
+Getting a participant profile image url from _BLCall_.
 
 ```swift
 // Get the interpreter profile image URL
-let url = call?.interlocutorInfo?.imageInfo?.url(size: nil)
+let url = call?.participants.first?.imageInfo?.url(size: nil)
 ```
 
 ## More Documentation
@@ -363,6 +346,4 @@ let url = call?.interlocutorInfo?.imageInfo?.url(size: nil)
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/0.5/docs/index.html)
-
-
+* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/1.0.0/docs/index.html)

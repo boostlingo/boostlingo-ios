@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  boostlingo-ios
+//  BoostlingoQuickstart
 //
-//  Created by Denis Kornev on 18/04/2019.
-//  Copyright © 2020 Boostlingo. All rights reserved.
+//  Created by Denis Kornev on 7/21/22.
+//  Copyright © 2022 Boostlingo. All rights reserved.
 //
 
 import UIKit
@@ -258,7 +258,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func btnSignInTouchUpInside(_ sender: Any) {
         state = .loading
         // For production builds use BLNullLogger() or your custom logger
-        self.boostlingo = BoostlingoSDK(authToken: self.token, region: self.selectedRegion!, logger: BLNullLogger())
+        self.boostlingo = BoostlingoSDK(authToken: self.token, region: self.selectedRegion!, logger: BLPrintLogger())
         self.boostlingo!.initialize() { [weak self] error in
             guard let self = self else {
                 return

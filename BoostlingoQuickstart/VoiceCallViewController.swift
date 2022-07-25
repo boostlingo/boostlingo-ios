@@ -3,7 +3,7 @@
 //  BoostlingoQuickstart
 //
 //  Created by Denis Kornev on 1/23/20.
-//  Copyright © 2020 Boostlingo. All rights reserved.
+//  Copyright © 2022 Boostlingo. All rights reserved.
 //
 
 import Foundation
@@ -94,7 +94,7 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     // MARK: - BLCallDelegate
-    func callDidConnect(_ call: BLCall) {
+    func callDidConnect(_ call: BLCall, participants: [BLParticipant]) {
         DispatchQueue.main.async {
             self.call = call as? BLVoiceCall
             self.callId = self.call?.callId
@@ -136,6 +136,31 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
             }))
             self.present(alert, animated: true)
         }
+    }
+    
+    func callParticipantConnected(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
+    
+    func callParticipantUpdated(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
+    
+    func callParticipantDisconnected(_ participant: BLParticipant, call: BLCall) {
+        print("Participants: \(call.participants.count)")
+        for p in call.participants {
+            printParticipant(p)
+        }
+    }
+    
+    private func printParticipant(_ participant: BLParticipant) {
+        print("identity: \(participant.identity), isAudioEnabled: \(participant.isAudioEnabled), isVideoEnabled: \(participant.isVideoEnabled), muteActionIsEnabled: \(participant.muteActionIsEnabled), removeActionIsEnabled: \(participant.removeActionIsEnabled), requiredName: \(participant.requiredName), participantType: \(participant.participantType), rating: \(String(describing: participant.rating)), companyName: \(String(describing: participant.companyName)), state: \(participant.state)")
     }
     
     // MARK: - BLChatDelegate

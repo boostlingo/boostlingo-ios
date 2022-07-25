@@ -1,10 +1,14 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'BoostlingoQuickstart' do
-  platform :ios, '12.0'
+  platform :ios, '12.2'
   use_frameworks!
 
-  pod 'BoostlingoSDK', '0.5.10'
+  # Release
+  pod 'BoostlingoSDK', '1.0.0'
+
+  # Local
+  # pod 'BoostlingoSDK', :path => '../boostlingo-sdk-ios-src/build/BoostlingoSDK.podspec'
 end
 
 post_install do |installer|

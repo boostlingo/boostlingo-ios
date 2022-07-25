@@ -1,0 +1,31 @@
+PODS:
+  - BoostlingoSDK (1.0.0):
+    - SwiftSignalRClient (= 0.9.0)
+    - TwilioVideo (= 5.1.1)
+    - TwilioVoice (= 6.4.2)
+  - SwiftSignalRClient (0.9.0)
+  - TwilioVideo (5.1.1)
+  - TwilioVoice (6.4.2)
+
+DEPENDENCIES:
+  - BoostlingoSDK (from `../boostlingo-sdk-ios-src/build/BoostlingoSDK.podspec`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SwiftSignalRClient
+    - TwilioVideo
+    - TwilioVoice
+
+EXTERNAL SOURCES:
+  BoostlingoSDK:
+    :path: "../boostlingo-sdk-ios-src/build/BoostlingoSDK.podspec"
+
+SPEC CHECKSUMS:
+  BoostlingoSDK: a76cd02a5d964dacd52e9ef09d9e5db6f223f934
+  SwiftSignalRClient: aba134f3d30f7eeb01008929e387b6e66546c7d5
+  TwilioVideo: 56aa8ca29205fff9ba69e167f818febd2d41ff95
+  TwilioVoice: 1bafb36f8709e60097086137c0d48205a46009d6
+
+PODFILE CHECKSUM: 6b4c09a6cb9eda89b29000ba79536f791986ca5f
+
+COCOAPODS: 1.11.3
