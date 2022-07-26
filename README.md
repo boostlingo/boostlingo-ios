@@ -345,5 +345,5 @@ let url = call?.participants.first?.imageInfo?.url(size: nil)
 
 You can find more documentation and useful information below:
 
-* [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master/Quickstart)
+* [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
 * [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/1.0/docs/index.html)
