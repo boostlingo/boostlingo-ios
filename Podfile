@@ -5,7 +5,7 @@ target 'BoostlingoQuickstart' do
   use_frameworks!
 
   # Release
-  pod 'BoostlingoSDK', '1.0.0'
+  pod 'BoostlingoSDK', '1.0.1'
 
   # Local
   # pod 'BoostlingoSDK', :path => '../boostlingo-sdk-ios-src/build/BoostlingoSDK.podspec'

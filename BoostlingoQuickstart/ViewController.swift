@@ -340,7 +340,19 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 
                 self.present(alertController, animated: true, completion: nil)
             } else {
-                let callRequest = CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender, isVideo: false)
+                let callRequest = CallRequest(
+                    languageFromId: self.selectedLanguageFrom!,
+                    languageToId: self.selectedLanguageTo!,
+                    serviceTypeId: self.selectedServiceType!,
+                    genderId: self.selectedGender,
+                    isVideo: false,
+                    data: [
+                        AdditionalField(
+                            key: "CustomKey",
+                            value: "CustomValue"
+                        )
+                    ]
+                )
                 self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
                     guard let self = self else { return }
 
@@ -399,7 +411,19 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     
     @IBAction func BtnVideoCallTouchUpInside(_ sender: Any) {
-        let callRequest = CallRequest(languageFromId: self.selectedLanguageFrom!, languageToId: self.selectedLanguageTo!, serviceTypeId: self.selectedServiceType!, genderId: self.selectedGender, isVideo: true)
+        let callRequest = CallRequest(
+            languageFromId: self.selectedLanguageFrom!,
+            languageToId: self.selectedLanguageTo!,
+            serviceTypeId: self.selectedServiceType!,
+            genderId: self.selectedGender,
+            isVideo: true,
+            data: [
+                AdditionalField(
+                    key: "CustomKey",
+                    value: "CustomValue"
+                )
+            ]
+        )
         self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
             guard let self = self else { return }
 

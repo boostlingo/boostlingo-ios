@@ -114,6 +114,7 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     
     // MARK: - BLCallDelegate
     func callDidConnect(_ call: BLCall, participants: [BLParticipant]) {
+        print("callDidConnect")
         DispatchQueue.main.async {
             self.call = call as? BLVideoCall
             self.callId = self.call?.callId
@@ -128,10 +129,16 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
             if let firstParticipant = participants.first {
                 self.call?.addRenderer(for: firstParticipant.identity, renderer: self.vRemoteVideo)
             }
+            
+            print("Participants: \(participants.count)")
+            for p in participants {
+                self.printParticipant(p)
+            }
         }
     }
     
     func callDidDisconnect(_ error: Error?) {
+        print("callDidDisconnect")
         DispatchQueue.main.async {
             self.call = nil
             self.state = .nocall
@@ -166,11 +173,10 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     func callParticipantConnected(_ participant: BLParticipant, call: BLCall) {
+        print("callParticipantConnected")
         DispatchQueue.main.async {
             print("Participants: \(call.participants.count)")
-            for p in call.participants {
-                self.printParticipant(p)
-            }
+            self.printParticipant(participant)
             
             if let firstParticipant = call.participants.first {
                 self.call?.addRenderer(for: firstParticipant.identity, renderer: self.vRemoteVideo)
@@ -179,25 +185,25 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     func callParticipantUpdated(_ participant: BLParticipant, call: BLCall) {
+        print("callParticipantUpdated")
         DispatchQueue.main.async {
             print("Participants: \(call.participants.count)")
-            for p in call.participants {
-                self.printParticipant(p)
-            }
+            self.printParticipant(participant)
         }
     }
     
     func callParticipantDisconnected(_ participant: BLParticipant, call: BLCall) {
+        print("callParticipantDisconnected")
         DispatchQueue.main.async {
             print("Participants: \(call.participants.count)")
-            for p in call.participants {
-                self.printParticipant(p)
-            }
+            self.printParticipant(participant)
         }
     }
     
     private func printParticipant(_ participant: BLParticipant) {
-        print("identity: \(participant.identity), isAudioEnabled: \(participant.isAudioEnabled), isVideoEnabled: \(participant.isVideoEnabled), muteActionIsEnabled: \(participant.muteActionIsEnabled), removeActionIsEnabled: \(participant.removeActionIsEnabled), requiredName: \(participant.requiredName), participantType: \(participant.participantType), rating: \(String(describing: participant.rating)), companyName: \(String(describing: participant.companyName)), state: \(participant.state)")
+        print(
+            "userAccountId: \(String(describing: participant.userAccountId)), thirdPartyParticipantId: \(String(describing: participant.thirdPartyParticipantId)), identity: \(participant.identity), isAudioEnabled: \(participant.isAudioEnabled), isVideoEnabled: \(participant.isVideoEnabled), muteActionIsEnabled: \(participant.muteActionIsEnabled), removeActionIsEnabled: \(participant.removeActionIsEnabled), requiredName: \(participant.requiredName), participantType: \(participant.participantType), rating: \(String(describing: participant.rating)), companyName: \(String(describing: participant.companyName)), state: \(participant.state), hash: \(participant.hashValue)"
+        )
     }
     
     // MARK: - BLChatDelegate
