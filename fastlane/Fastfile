@@ -1,0 +1,183 @@
+# update_fastlane
+default_platform(:ios)
+
+def default_ci_keychain_name
+  "boostlingo_tmp_keychain"
+end
+
+def setup_default_ci_keychain
+  unless Helper.mac?
+    UI.message("Skipping Keychain setup on non-macOS CI Agent")
+    return
+  end
+  unless ENV["MATCH_KEYCHAIN_NAME"].nil?
+    UI.message("Skipping Keychain setup as a keychain was already specified")
+    return
+  end
+  keychain_name = default_ci_keychain_name
+  ENV["MATCH_KEYCHAIN_NAME"] = keychain_name
+  ENV["MATCH_KEYCHAIN_PASSWORD"] = ""
+  UI.message("Creating temporary keychain: \"#{keychain_name}\".")
+  Actions::CreateKeychainAction.run(
+    name: keychain_name,
+    default_keychain: true,
+    unlock: true,
+    timeout: 3600,
+    lock_when_sleeps: true,
+    password: "",
+    add_to_search_list: true
+  )
+  UI.message("Enabling match readonly mode.")
+  ENV["MATCH_READONLY"] = true.to_s
+end
+
+def delete_default_ci_keychain
+  unless Helper.mac?
+    UI.message("Skipping Keychain setup on non-macOS CI Agent")
+    return
+  end
+  keychain_name = default_ci_keychain_name
+  delete_keychain(
+    name: keychain_name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{keychain_name}-db")
+end
+
+platform :ios do
+
+  lane :slack_notification_running do |options|
+    identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    slack_url = options[:slack_url]
+    run_number = options[:run_number]
+    event_name = options[:event_name]
+
+    slack(
+      slack_url: slack_url,
+      message: "Running - #{identifier}",
+      success: true,
+      fail_on_error: false,
+      payload: {
+        "Run Number" => run_number.to_s,
+        "Build Date" => Time.new.to_s,
+        "Built by" => "GitHub Actions",
+        "Event Name" => event_name
+      },
+      default_payloads: [:lane, :git_branch, :git_author]
+    )
+  end
+
+  lane :slack_notification_succeed do |options|
+    identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    slack_url = options[:slack_url]
+    run_number = options[:run_number]
+    event_name = options[:event_name]
+
+    slack(
+      slack_url: slack_url,
+      message: "Succeed - #{identifier}",
+      success: true,
+      fail_on_error: true,
+      payload: {
+        "Run Number" => run_number.to_s,
+        "Build Date" => Time.new.to_s,
+        "Built by" => "GitHub Actions",
+        "Event Name" => event_name
+      },
+      default_payloads: [:lane, :git_branch, :git_author]
+    )
+  end
+
+  lane :slack_notification_failed do |options|
+    identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    slack_url = options[:slack_url]
+    run_number = options[:run_number]
+    event_name = options[:event_name]
+
+    slack(
+      slack_url: slack_url,
+      message: "Failure - #{identifier}",
+      success: false,
+      fail_on_error: false,
+      payload: {
+        "Run Number" => run_number.to_s,
+        "Build Date" => Time.new.to_s,
+        "Built by" => "GitHub Actions",
+        "Event Name" => event_name
+      },
+      default_payloads: [:lane, :git_branch, :git_author]
+    )
+  end
+
+  lane :build do |options|
+    identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    slack_url = options[:slack_url]
+    run_number = options[:run_number]
+    build_type = options[:build_type]
+    skip_archive = options[:skip_archive]
+    datadog_api_key = options[:datadog_api_key]
+
+    match_type = 'adhoc'
+    export_method = 'ad-hoc'
+    scheme = 'BoostlingoQuickstart'
+
+    #remove archives
+    sh(command: "rm -vfr ~/Library/Developer/Xcode/Archives/*")
+    
+    #remove provisioning profiles to eliminate any conflicts
+    sh(command: "rm -vfr ~/Library/MobileDevice/Provisioning\ Profiles/*")
+
+    clear_derived_data
+
+    increment_build_number(
+      build_number: run_number.to_s
+    )
+
+    setup_default_ci_keychain if is_ci
+
+    setup_ci if is_ci
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      targets: [scheme],
+      code_sign_identity: "Apple Distribution",
+      bundle_identifier: identifier,
+      build_configurations: ["Release"]
+    )
+
+    match(
+      type: match_type, 
+      readonly: is_ci,
+      app_identifier: identifier
+    )
+
+    evn_variable_name = 'sigh_' + identifier + '_' + match_type + '_profile-path'
+    profile_path = ENV[evn_variable_name]
+
+    update_project_provisioning(
+      profile: profile_path, 
+      build_configuration: "Release"
+    )
+
+    cocoapods(
+      clean_install: false,
+      use_bundle_exec: false
+    )
+
+    gym(
+      scheme: scheme,
+      configuration: "Release",
+      clean: true,
+      include_bitcode: false,
+      output_name: "lspoutbound.ipa",
+      export_method: export_method
+    )
+
+  end
+
+  after_all do |lane|
+    delete_default_ci_keychain if is_ci?
+  end
+
+  error do |lane, exception|
+    delete_default_ci_keychain if is_ci?
+  end
+end
