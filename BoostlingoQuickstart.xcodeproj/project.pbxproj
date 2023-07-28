@@ -368,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2FL58TQ7M6;
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -389,6 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2FL58TQ7M6;
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
