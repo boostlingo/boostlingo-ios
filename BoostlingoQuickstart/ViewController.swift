@@ -98,6 +98,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     // MARK: - Fields
     var callId: Int?
     private var boostlingo: BoostlingoSDK?
+    private var customFieldDefaultValueProvider = CustomFieldDefaultValueProvider()
     private var regions: [String] = []
     private var selectedRegion: String?
     private var languages: [Language]?
@@ -108,6 +109,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     private var genders: [Gender]?
     private var selectedGender: Int?
     private var call: BLCall?
+    private var profile: Boostlingo.Profile?
     
     // MARK: - Outlets
     @IBOutlet weak var tfRegion: UITextField!
@@ -141,7 +143,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "Region":
@@ -275,10 +277,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
                     message = error!.localizedDescription
                     break
                 }
-                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
+                self.showErrorMessage(message)
                 return
+            }
+            
+            self.boostlingo!.getProfile { [weak self] profile, error in
+                guard let self else { return }
+                if let error {
+                    self.showErrorMessage(error.localizedDescription)
+                }
+                self.profile = profile
             }
             
             self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
@@ -308,12 +316,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
                         message = error!.localizedDescription
                         break
                     }
-                    let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
+                    self.showErrorMessage(message)
                 }
             }
         }
+    }
+    
+    private func showErrorMessage(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @IBAction func btnCallTouchUpInside(_ sender: Any) {
@@ -326,9 +338,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 let goToSettings: UIAlertAction = UIAlertAction(title: "Settings",
                                                                 style: .default,
                                                                 handler: { (action) in
-                                                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                                                                              options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: false],
-                                                                                              completionHandler: nil)
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                              options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: false],
+                                              completionHandler: nil)
                 })
                 alertController.addAction(goToSettings)
                 
@@ -340,42 +352,66 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 
                 self.present(alertController, animated: true, completion: nil)
             } else {
-                let callRequest = CallRequest(
-                    languageFromId: self.selectedLanguageFrom!,
-                    languageToId: self.selectedLanguageTo!,
-                    serviceTypeId: self.selectedServiceType!,
-                    genderId: self.selectedGender,
-                    isVideo: false,
-                    data: [
-                        AdditionalField(
-                            key: "CustomKey",
-                            value: "CustomValue"
-                        )
-                    ]
-                )
-                self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
-                    guard let self = self else { return }
-
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            self.state = .authenticated
-                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                            self.present(alert, animated: true)
-                            return
-                        } else {
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let controller = storyboard.instantiateViewController(withIdentifier: "VoiceCallViewController") as! VoiceCallViewController
-                            controller.boostlingo = self.boostlingo
-                            controller.callRequest = callRequest
-                            controller.delegate = self
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
+                guard let profile = self.profile else {
+                    self.showErrorMessage("Profile must be not nil")
+                    return
+                }
+                self.boostlingo?.getPreCallCustomForm(
+                    companyAccountId: Int64(profile.companyAccountId ?? 0)
+                ) { [weak self] customFormData, error in
+                    guard let self else { return }
+                    if let error {
+                        self.showErrorMessage(error.localizedDescription)
+                        return
                     }
+                    
+                    let fieldData = customFormData?.fields.map({ customField in
+                        CustomFieldDto(
+                            fieldId: customField.fieldId,
+                            value: self.customFieldDefaultValueProvider.provideDefaultValue(for: customField)
+                        )
+                    }) ?? []
+                    
+                    self.validateAndStartAudioCall(fieldData: fieldData)
                 }
             }
         }
     }
+    
+    private func validateAndStartAudioCall(fieldData: [CustomFieldDto]) {
+        let callRequest = CallRequest(
+            languageFromId: self.selectedLanguageFrom!,
+            languageToId: self.selectedLanguageTo!,
+            serviceTypeId: self.selectedServiceType!,
+            genderId: self.selectedGender,
+            isVideo: false,
+            data: [
+                AdditionalField(
+                    key: "CustomKey",
+                    value: "CustomValue"
+                )
+            ],
+            fieldData: fieldData
+        )
+        self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.state = .authenticated
+                    self.showErrorMessage(error.localizedDescription)
+                    return
+                } else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "VoiceCallViewController") as! VoiceCallViewController
+                    controller.boostlingo = self.boostlingo
+                    controller.callRequest = callRequest
+                    controller.delegate = self
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+        }
+    }
+    
     
     @IBAction func btnLastCallDetailsTouchUpInside(_ sender: Any) {
         if let callId = self.callId {
@@ -401,9 +437,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
                             message = error!.localizedDescription
                             break
                         }
-                        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
+                        self.showErrorMessage(error?.localizedDescription ?? "")
                     }
                 }
             }
@@ -411,6 +445,31 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     
     @IBAction func BtnVideoCallTouchUpInside(_ sender: Any) {
+        guard let profile else {
+            showErrorMessage("Profile must be not nil")
+            return
+        }
+        self.boostlingo?.getPreCallCustomForm(
+            companyAccountId: Int64(profile.companyAccountId ?? 0)
+        ) { [weak self] customFormData, error in
+            guard let self else { return }
+            if let error {
+                self.showErrorMessage(error.localizedDescription)
+                return
+            }
+            
+            let fieldData = customFormData?.fields.map({ customField in
+                CustomFieldDto(
+                    fieldId: customField.fieldId,
+                    value: self.customFieldDefaultValueProvider.provideDefaultValue(for: customField)
+                )
+            }) ?? []
+            
+            self.validateAndStartAudioCall(fieldData: fieldData)
+        }
+    }
+    
+    private func validateAndStartVideoCall(fieldData: [CustomFieldDto]) {
         let callRequest = CallRequest(
             languageFromId: self.selectedLanguageFrom!,
             languageToId: self.selectedLanguageTo!,
@@ -422,11 +481,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
                     key: "CustomKey",
                     value: "CustomValue"
                 )
-            ]
+            ],
+            fieldData: fieldData
         )
         self.boostlingo?.validateCallReq(callReq: callRequest) { [weak self] error in
             guard let self = self else { return }
-
+            
             if let error = error {
                 self.state = .authenticated
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)

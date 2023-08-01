@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53D927102A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */; };
 		54D8EB6A49410B6160A2E772 /* Pods_BoostlingoQuickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF3F798E741AC24E81581B /* Pods_BoostlingoQuickstart.framework */; };
 		8417FCCB23DA73AC009DA03C /* VoiceCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */; };
 		8417FCCC23DA73AC009DA03C /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		08FC68BEA92784E3578DB117 /* Pods-BoostlingoQuickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.debug.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.debug.xcconfig"; sourceTree = "<group>"; };
 		2D85F6CE8785BED489202228 /* Pods-BoostlingoQuickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.release.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.release.xcconfig"; sourceTree = "<group>"; };
+		53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldDefaultValueProvider.swift; sourceTree = "<group>"; };
 		8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceCallViewController.swift; sourceTree = "<group>"; };
 		8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		8417FCCA23DA73AC009DA03C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				84A1297523DA727400E6B062 /* Assets.xcassets */,
 				84A1297723DA727400E6B062 /* LaunchScreen.storyboard */,
 				84A1297A23DA727400E6B062 /* Info.plist */,
+				53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */,
 			);
 			path = BoostlingoQuickstart;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			files = (
 				8417FCCB23DA73AC009DA03C /* VoiceCallViewController.swift in Sources */,
 				84A1297123DA727300E6B062 /* ViewController.swift in Sources */,
+				53D927102A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift in Sources */,
 				8417FCCC23DA73AC009DA03C /* VideoCallViewController.swift in Sources */,
 				8417FCCD23DA73AC009DA03C /* TableViewController.swift in Sources */,
 				84798CFB23DA748500C57B5C /* TableViewItem.swift in Sources */,
