@@ -11,7 +11,7 @@ import Boostlingo
 
 struct CustomFieldDefaultValueProvider {
     
-    func provideDefaultValue(for field: CustomField) -> AnyHashable {
+    func provideDefaultValue(for field: any CustomField) -> AnyHashable {
 
         switch field {
         case let field as EditTextCustomField:
