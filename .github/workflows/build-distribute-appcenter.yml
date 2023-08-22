@@ -25,7 +25,16 @@ jobs:
         run: bundle install
 
       - name: Build Boostlingo iOS app
-        run: bundle exec fastlane build slack_url:'${{secrets.SLACK_URL}}' run_number:'${{ github.run_number }}' skip_archive:false datadog_api_key:'${{ secrets.DATADOG_API_KEY }}'
+        run: bundle exec fastlane build run_number:'${{ github.run_number }}' skip_archive:false
         env:
           MATCH_GIT_BASIC_AUTHORIZATION: '${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}'
           MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
+          
+      - name: Install App Center CLI
+        run: npm install -g appcenter-cli
+
+      - name: Publish to App Center
+        run: appcenter distribute release --app QuickStart/BoostlingoQuickstart
+          --file BoostlingoQuickStart.ipa
+          --token ${{secrets.APPCENTER_TOKEN}} --group QA
+
