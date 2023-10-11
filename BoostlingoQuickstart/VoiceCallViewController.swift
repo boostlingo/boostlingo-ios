@@ -61,29 +61,25 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.boostlingo!.chatDelegate = self
-        self.boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
-            guard let self = self else {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        boostlingo!.chatDelegate = self
+        boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
+            guard let self else { return }
+
+            if let error {
+                self.state = .nocall
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+                    guard let self = self else {
+                        return
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true)
                 return
             }
-
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.state = .nocall
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-                        guard let self = self else {
-                            return
-                        }
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    self.present(alert, animated: true)
-                    return
-                }
-                self.call = call
-                self.state = .calling
-            }
+            self.call = call
+            self.state = .calling
         }
     }
     
@@ -173,28 +169,28 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     func chatMessageRecieved(message: ChatMessage) {
-        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
     
     // MARK: - Actions
     @IBAction func btnSendMessageTouchUpInside(_ sender: Any) {
         boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                    return
-                } else {
-                    let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                     self.present(alert, animated: true)
-                     return
-                }
+            guard let self else { return }
+
+            if let error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
+            } else {
+                let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
             }
         }
     }
@@ -202,22 +198,20 @@ class VoiceCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     @IBAction func btnHangUpTouchUpInside(_ sender: Any) {
         state = .nocall
         boostlingo!.hangUp() { [weak self] error in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
-                        guard let self = self else {
-                            return
-                        }
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    self.present(alert, animated: true)
-                    return
-                } else {
-                     self.navigationController?.popViewController(animated: true)
-                }
+            guard let self else { return }
+
+            if let error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
+                    guard let self = self else {
+                        return
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true)
+                return
+            } else {
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

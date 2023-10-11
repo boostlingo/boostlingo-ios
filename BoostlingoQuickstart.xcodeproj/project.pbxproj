@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54D8EB6A49410B6160A2E772 /* Pods_BoostlingoQuickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF3F798E741AC24E81581B /* Pods_BoostlingoQuickstart.framework */; };
+		53D927102A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */; };
 		8417FCCB23DA73AC009DA03C /* VoiceCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */; };
 		8417FCCC23DA73AC009DA03C /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */; };
 		8417FCCD23DA73AC009DA03C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCCA23DA73AC009DA03C /* TableViewController.swift */; };
@@ -17,15 +17,44 @@
 		84A1297423DA727300E6B062 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297223DA727300E6B062 /* Main.storyboard */; };
 		84A1297623DA727400E6B062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297523DA727400E6B062 /* Assets.xcassets */; };
 		84A1297923DA727400E6B062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297723DA727400E6B062 /* LaunchScreen.storyboard */; };
+		84A3236F2AD0B7CD00A58A3D /* VoiceCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */; };
+		84A323702AD0B7CD00A58A3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1297023DA727300E6B062 /* ViewController.swift */; };
+		84A323712AD0B7CD00A58A3D /* CustomFieldDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */; };
+		84A323722AD0B7CD00A58A3D /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */; };
+		84A323732AD0B7CD00A58A3D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCCA23DA73AC009DA03C /* TableViewController.swift */; };
+		84A323742AD0B7CD00A58A3D /* TableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84798CFA23DA748500C57B5C /* TableViewItem.swift */; };
+		84A323752AD0B7CD00A58A3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1296C23DA727300E6B062 /* AppDelegate.swift */; };
+		84A323782AD0B7CD00A58A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297723DA727400E6B062 /* LaunchScreen.storyboard */; };
+		84A323792AD0B7CD00A58A3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297523DA727400E6B062 /* Assets.xcassets */; };
+		84A3237A2AD0B7CD00A58A3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297223DA727300E6B062 /* Main.storyboard */; };
+		84A323812AD0B7EB00A58A3D /* Boostlingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A323802AD0B7EB00A58A3D /* Boostlingo.framework */; };
+		84A323822AD0B7EB00A58A3D /* Boostlingo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84A323802AD0B7EB00A58A3D /* Boostlingo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC4D67A46C11174303B3B32D /* Pods_BoostlingoQuickstartLocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7D555ED47F48BA6B72B2A3 /* Pods_BoostlingoQuickstartLocal.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		84A323832AD0B7EB00A58A3D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				84A323822AD0B7EB00A58A3D /* Boostlingo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		08FC68BEA92784E3578DB117 /* Pods-BoostlingoQuickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.debug.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.debug.xcconfig"; sourceTree = "<group>"; };
-		2D85F6CE8785BED489202228 /* Pods-BoostlingoQuickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.release.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.release.xcconfig"; sourceTree = "<group>"; };
+		1324D8E84202F88142EC52B2 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstartLocal.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal.debug.xcconfig"; sourceTree = "<group>"; };
+		53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldDefaultValueProvider.swift; sourceTree = "<group>"; };
 		8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceCallViewController.swift; sourceTree = "<group>"; };
 		8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		8417FCCA23DA73AC009DA03C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		84798CFA23DA748500C57B5C /* TableViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewItem.swift; sourceTree = "<group>"; };
+		848330DA2ACF2308007228B7 /* Boostlingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Boostlingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		848A29472ACF62260065292C /* Boostlingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Boostlingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1296923DA727300E6B062 /* BoostlingoQuickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostlingoQuickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1296C23DA727300E6B062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A1297023DA727300E6B062 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +62,11 @@
 		84A1297523DA727400E6B062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84A1297823DA727400E6B062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84A1297A23DA727400E6B062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CADF3F798E741AC24E81581B /* Pods_BoostlingoQuickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoostlingoQuickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84A3237E2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostlingoQuickstartLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84A3237F2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = BoostlingoQuickstartLocal.plist; path = "/Users/admin/dev/boostlingo-sdk-ios-src/BoostlingoQuickstart/BoostlingoQuickstartLocal.plist"; sourceTree = "<absolute>"; };
+		84A323802AD0B7EB00A58A3D /* Boostlingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Boostlingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A83DAD61140F5539DED912A9 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstartLocal.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal.release.xcconfig"; sourceTree = "<group>"; };
+		AD7D555ED47F48BA6B72B2A3 /* Pods_BoostlingoQuickstartLocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoostlingoQuickstartLocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +74,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D8EB6A49410B6160A2E772 /* Pods_BoostlingoQuickstart.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84A323762AD0B7CD00A58A3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A323812AD0B7EB00A58A3D /* Boostlingo.framework in Frameworks */,
+				FC4D67A46C11174303B3B32D /* Pods_BoostlingoQuickstartLocal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +92,8 @@
 		74E5DD9253188F3191319C03 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				08FC68BEA92784E3578DB117 /* Pods-BoostlingoQuickstart.debug.xcconfig */,
-				2D85F6CE8785BED489202228 /* Pods-BoostlingoQuickstart.release.xcconfig */,
+				1324D8E84202F88142EC52B2 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */,
+				A83DAD61140F5539DED912A9 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -64,6 +105,7 @@
 				84A1296A23DA727300E6B062 /* Products */,
 				74E5DD9253188F3191319C03 /* Pods */,
 				CFAA9C160ADF3939B9B8757F /* Frameworks */,
+				84A3237F2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				84A1296923DA727300E6B062 /* BoostlingoQuickstart.app */,
+				84A3237E2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,6 +127,7 @@
 				8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */,
 				84798CFA23DA748500C57B5C /* TableViewItem.swift */,
 				8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */,
+				53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */,
 				84A1297223DA727300E6B062 /* Main.storyboard */,
 				84A1297523DA727400E6B062 /* Assets.xcassets */,
 				84A1297723DA727400E6B062 /* LaunchScreen.storyboard */,
@@ -95,7 +139,10 @@
 		CFAA9C160ADF3939B9B8757F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CADF3F798E741AC24E81581B /* Pods_BoostlingoQuickstart.framework */,
+				84A323802AD0B7EB00A58A3D /* Boostlingo.framework */,
+				848A29472ACF62260065292C /* Boostlingo.framework */,
+				848330DA2ACF2308007228B7 /* Boostlingo.framework */,
+				AD7D555ED47F48BA6B72B2A3 /* Pods_BoostlingoQuickstartLocal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,11 +154,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84A1297D23DA727400E6B062 /* Build configuration list for PBXNativeTarget "BoostlingoQuickstart" */;
 			buildPhases = (
-				7E075AFBD5E3B14DC069C033 /* [CP] Check Pods Manifest.lock */,
 				84A1296523DA727300E6B062 /* Sources */,
 				84A1296623DA727300E6B062 /* Frameworks */,
 				84A1296723DA727300E6B062 /* Resources */,
-				6363F5ED6C9FE366C4AA1F35 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,6 +165,26 @@
 			name = BoostlingoQuickstart;
 			productName = BoostlingoQuickstart;
 			productReference = 84A1296923DA727300E6B062 /* BoostlingoQuickstart.app */;
+			productType = "com.apple.product-type.application";
+		};
+		84A3236D2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84A3237B2AD0B7CD00A58A3D /* Build configuration list for PBXNativeTarget "BoostlingoQuickstartLocal" */;
+			buildPhases = (
+				F5B23E03D170DF21BE9C345D /* [CP] Check Pods Manifest.lock */,
+				84A3236E2AD0B7CD00A58A3D /* Sources */,
+				84A323762AD0B7CD00A58A3D /* Frameworks */,
+				84A323772AD0B7CD00A58A3D /* Resources */,
+				84A323832AD0B7EB00A58A3D /* Embed Frameworks */,
+				3DEE52923C389DEF410C1E54 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BoostlingoQuickstartLocal;
+			productName = BoostlingoQuickstart;
+			productReference = 84A3237E2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -151,6 +216,7 @@
 			projectRoot = "";
 			targets = (
 				84A1296823DA727300E6B062 /* BoostlingoQuickstart */,
+				84A3236D2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal */,
 			);
 		};
 /* End PBXProject section */
@@ -166,27 +232,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84A323772AD0B7CD00A58A3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A323782AD0B7CD00A58A3D /* LaunchScreen.storyboard in Resources */,
+				84A323792AD0B7CD00A58A3D /* Assets.xcassets in Resources */,
+				84A3237A2AD0B7CD00A58A3D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6363F5ED6C9FE366C4AA1F35 /* [CP] Embed Pods Frameworks */ = {
+		3DEE52923C389DEF410C1E54 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E075AFBD5E3B14DC069C033 /* [CP] Check Pods Manifest.lock */ = {
+		F5B23E03D170DF21BE9C345D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -201,7 +277,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BoostlingoQuickstart-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BoostlingoQuickstartLocal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -217,10 +293,25 @@
 			files = (
 				8417FCCB23DA73AC009DA03C /* VoiceCallViewController.swift in Sources */,
 				84A1297123DA727300E6B062 /* ViewController.swift in Sources */,
+				53D927102A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift in Sources */,
 				8417FCCC23DA73AC009DA03C /* VideoCallViewController.swift in Sources */,
 				8417FCCD23DA73AC009DA03C /* TableViewController.swift in Sources */,
 				84798CFB23DA748500C57B5C /* TableViewItem.swift in Sources */,
 				84A1296D23DA727300E6B062 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84A3236E2AD0B7CD00A58A3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A3236F2AD0B7CD00A58A3D /* VoiceCallViewController.swift in Sources */,
+				84A323702AD0B7CD00A58A3D /* ViewController.swift in Sources */,
+				84A323712AD0B7CD00A58A3D /* CustomFieldDefaultValueProvider.swift in Sources */,
+				84A323722AD0B7CD00A58A3D /* VideoCallViewController.swift in Sources */,
+				84A323732AD0B7CD00A58A3D /* TableViewController.swift in Sources */,
+				84A323742AD0B7CD00A58A3D /* TableViewItem.swift in Sources */,
+				84A323752AD0B7CD00A58A3D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,20 +455,21 @@
 		};
 		84A1297E23DA727400E6B062 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08FC68BEA92784E3578DB117 /* Pods-BoostlingoQuickstart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FL58TQ7M6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.BoostlingoQuickstart;
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -385,20 +477,71 @@
 		};
 		84A1297F23DA727400E6B062 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D85F6CE8785BED489202228 /* Pods-BoostlingoQuickstart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FL58TQ7M6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BoostlingoQuickstart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.BoostlingoQuickstart;
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		84A3237C2AD0B7CD00A58A3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1324D8E84202F88142EC52B2 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2FL58TQ7M6;
+				INFOPLIST_FILE = BoostlingoQuickstartLocal.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc com.boostlingo.sdk.quickstart";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84A3237D2AD0B7CD00A58A3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A83DAD61140F5539DED912A9 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2FL58TQ7M6;
+				INFOPLIST_FILE = BoostlingoQuickstartLocal.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc com.boostlingo.sdk.quickstart";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -421,6 +564,15 @@
 			buildConfigurations = (
 				84A1297E23DA727400E6B062 /* Debug */,
 				84A1297F23DA727400E6B062 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84A3237B2AD0B7CD00A58A3D /* Build configuration list for PBXNativeTarget "BoostlingoQuickstartLocal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84A3237C2AD0B7CD00A58A3D /* Debug */,
+				84A3237D2AD0B7CD00A58A3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

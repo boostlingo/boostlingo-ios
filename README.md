@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '1.0.1'
+  pod 'BoostlingoSDK', '1.0.2'
 end
 ```
 
@@ -67,7 +67,7 @@ Now let's go to the Quickstart folder. Then run `pod install --verbose` to downl
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
-private let token = <TOKEN>
+tfToken.text = "your token"
 ```
 
 ### Create instance of Boostlingo class and load dictionaries
@@ -75,12 +75,10 @@ private let token = <TOKEN>
 We recommend you do this only once. The Boostlingo library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required. In this example we populate a series of select dropdown inputs.
 
 ```swift
-// For debug builds use BLPrintLogger() or your custom logger
-self.boostlingo = BoostlingoSDK(authToken: self.token, region: self.selectedRegion!, logger: BLNullLogger())
-self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
-    guard let self = self else {
-        return
-    }
+// For production builds use BLNullLogger() or your custom logger
+boostlingo = BoostlingoSDK(authToken: self.tfToken.text ?? "", region: self.selectedRegion!, logger: BLPrintLogger())
+boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
+    guard let self else { return }
     
     if error == nil {
         self.languages = callDictionaries?.languages
@@ -104,9 +102,7 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
             message = error!.localizedDescription
             break
         }
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
+        self.showErrorMessage(message)
     }
 }
 ```
@@ -185,6 +181,106 @@ self.boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) i
     }
 ```
 
+### Retriving pre-call custom form
+
+```swift
+boostlingo.getPreCallCustomForm() { [weak self] customFormData, error in
+    guard let self else { return }
+
+    if let error {
+        self.showErrorMessage(error.localizedDescription)
+        return
+    }
+
+    // Show you custom form UI here using the customFormData
+
+    let fieldData = customFormData?.fields.map({ customField in
+        CustomFieldDto(
+            fieldId: customField.fieldId,
+            value: // user answer
+        )
+    }) ?? []
+}
+```
+
+You should add answers collected from user to the `fieldData` list which can be used later for creating a call request:
+
+```swift
+let callRequest = CallRequest(
+    languageFromId: self.selectedLanguageFrom!,
+    languageToId: self.selectedLanguageTo!,
+    serviceTypeId: self.selectedServiceType!,
+    genderId: self.selectedGender,
+    isVideo: true,
+    data: [
+        AdditionalField(
+            key: "CustomKey",
+            value: "CustomValue"
+        )
+    ],
+    fieldData: fieldData
+)
+```
+
+#### Custom form fields
+
+```swift
+public struct CheckBoxCustomField: CustomField, Hashable {
+    
+    public let fieldId: Int64
+    public let fieldTypeId: Int
+    public let label: String
+    public let readonly: Bool
+    public let required: Bool
+    public var value: [Int64]?
+    public let options: [CustomFieldOption]
+}
+
+public struct EditTextCustomField: CustomField, Hashable {
+    
+    public let fieldId: Int64
+    public let fieldTypeId: Int
+    public let label: String
+    public let readonly: Bool
+    public let required: Bool
+    public var value: String?
+    public let fieldType: FieldType
+}
+
+public struct ListMultipleCustomField: CustomField, Hashable {
+    
+    public let fieldId: Int64
+    public let fieldTypeId: Int
+    public let label: String
+    public let readonly: Bool
+    public let required: Bool
+    public var value: [Int64]?
+    public let options: [CustomFieldOption]
+}
+
+public struct ListSingleCustomField: CustomField, Hashable {
+    
+    public let fieldId: Int64
+    public let fieldTypeId: Int
+    public let label: String
+    public let readonly: Bool
+    public let required: Bool
+    public var value: Int64?
+    public let options: [CustomFieldOption]
+}
+
+public struct RadioButtonCustomField: CustomField, Hashable {
+    
+    public let fieldId: Int64
+    public let fieldTypeId: Int
+    public let label: String
+    public let readonly: Bool
+    public let required: Bool
+    public var value: Int64?
+    public let options: [CustomFieldOption]
+}
+```
+
 ### Placing a voice call
 
 Before placing a call you will need to check record permission:
@@ -217,28 +313,24 @@ private func checkRecordPermission(completion: @escaping (_ permissionGranted: B
 ```
 
 ```swift
-self.boostlingo!.delegate = self
-self.boostlingo!.makeVoiceCall(callRequest: callRequest!) { [weak self] error in
-    guard let self = self else {
+boostlingo!.chatDelegate = self
+boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
+    guard let self else { return }
+
+    if let error {
+        self.state = .nocall
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+            guard let self = self else {
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true)
         return
     }
-
-    DispatchQueue.main.async {
-        if let error = error {
-            self.state = .nocall
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-                guard let self = self else {
-                    return
-                }
-                self.navigationController?.popViewController(animated: true)
-            }))
-            self.present(alert, animated: true)
-            return
-        }
-
-        self.state = .calling
-    }
+    self.call = call
+    self.state = .calling
 }
 ```
 
@@ -249,27 +341,25 @@ You don't have to check the camera permission, the sdk will do it by itself. But
 ```swift
 vRemoteVideo.contentMode = .scaleAspectFit
 vLocalVideo.contentMode = .scaleAspectFit
-boostlingo!.makeVideoCall(callRequest: callRequest!, localVideoView: vLocalVideo, delegate: self)  { [weak self] error in
-    guard let self = self else {
+boostlingo!.chatDelegate = self
+boostlingo!.makeVideoCall(callRequest: callRequest!, localVideoView: vLocalVideo, delegate: self) { [weak self] call, error in
+    guard let self else { return }
+
+    if let error {
+        self.state = .nocall
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+            guard let self = self else {
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true)
         return
     }
-    
-    DispatchQueue.main.async {
-        if let error = error {
-            self.state = .nocall
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-                guard let self = self else {
-                    return
-                }
-                self.navigationController?.popViewController(animated: true)
-            }))
-            self.present(alert, animated: true)
-            return
-        }
-        
-        self.state = .calling
-    }
+
+    self.call = call
+    self.state = .calling
 }
 
 // Adding a renderer for a participant
@@ -295,9 +385,11 @@ func chatDisconnected() {
 }
 
 func chatMessageRecieved(message: ChatMessage) {
-    let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    present(alert, animated: true)
+    DispatchQueue.main.async {
+        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
 }
 ```
 
@@ -305,20 +397,18 @@ Sending messages.
 
 ```swift
 boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
-    guard let self = self else { return }
-    
-    DispatchQueue.main.async {
-        if let error = error {
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+    guard let self else { return }
+
+    if let error = error {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        return
+    } else {
+        let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.present(alert, animated: true)
             return
-        } else {
-            let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
-                return
-        }
     }
 }
 ```

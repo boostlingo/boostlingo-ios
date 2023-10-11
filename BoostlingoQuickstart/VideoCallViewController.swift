@@ -82,27 +82,23 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
         vLocalVideo.contentMode = .scaleAspectFit
         boostlingo!.chatDelegate = self
         boostlingo!.makeVideoCall(callRequest: callRequest!, localVideoView: vLocalVideo, delegate: self) { [weak self] call, error in
-            guard let self = self else {
+            guard let self else { return }
+
+            if let error {
+                self.state = .nocall
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
+                    guard let self = self else {
+                        return
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true)
                 return
             }
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.state = .nocall
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-                        guard let self = self else {
-                            return
-                        }
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    self.present(alert, animated: true)
-                    return
-                }
-                
-                self.call = call
-                self.state = .calling
-            }
+
+            self.call = call
+            self.state = .calling
         }
     }
     
@@ -216,9 +212,11 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     func chatMessageRecieved(message: ChatMessage) {
-        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
     
     // MARK: - Actions
@@ -235,20 +233,18 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
         
     @IBAction func btnSendMessageTouchUpInside(_ sender: Any) {
         boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                    return
-                } else {
-                    let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                     self.present(alert, animated: true)
-                     return
-                }
+            guard let self else { return }
+
+            if let error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
+            } else {
+                let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+                return
             }
         }
     }
@@ -256,34 +252,30 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     @IBAction func btnHangUpTouchUpInside(_ sender: Any) {
         state = .nocall
         boostlingo!.hangUp() { [weak self] error in
-            guard let self = self else { return }
-          
-            DispatchQueue.main.async {
-                if let error = error {
+            guard let self else { return }
+
+            if let error {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
-                    guard let self = self else {
-                        return
-                    }
+                    guard let self else { return }
                     self.navigationController?.popViewController(animated: true)
                 }))
                 self.present(alert, animated: true)
                 return
-                } else {
-                    self.navigationController?.popViewController(animated: true)
-                }
+            } else {
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
     
     @IBAction func btnFlipTouchUpInside(_ sender: Any) {
-        if let call = call {
+        if let call {
             call.flipCamera()
         }
     }
     
     @IBAction func btnMuteTouchUpInside(_ sender: Any) {
-        if let call = call {
+        if let call {
             call.isMuted = !call.isMuted
             if call.isMuted {
                 btnMute.setTitle("Muted", for: .normal)
@@ -294,22 +286,20 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     }
     
     @IBAction func btnDialThirdPartyTouchUpInside(_ sender: Any) {
-        if let call = call {
+        if let call {
             call.dialThirdParty(phone: "18004444444") { [weak self] error in
-                guard let self = self else { return }
-                
-                DispatchQueue.main.async {
-                    if let error = error {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                        return
-                    } else {
-                        let alert = UIAlertController(title: "Success", message: "dialThirdParty", preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                         self.present(alert, animated: true)
-                         return
-                    }
+                guard let self else { return }
+
+                if let error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "dialThirdParty", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
                 }
             }
         }
@@ -318,20 +308,18 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     @IBAction func btnHangUpThirdPartyTouchUpInside(_ sender: Any) {
         if let call = call, let participant = call.participants.first(where: { $0.participantType == .thirdParty }) {
             call.hangupThirdPartyParticipant(identity: participant.identity) { [weak self] error in
-                guard let self = self else { return }
-                
-                DispatchQueue.main.async {
-                    if let error = error {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                        return
-                    } else {
-                        let alert = UIAlertController(title: "Success", message: "hangupThirdPartyParticipant", preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                         self.present(alert, animated: true)
-                         return
-                    }
+                guard let self else { return }
+
+                if let error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "hangupThirdPartyParticipant", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
                 }
             }
         }
@@ -340,20 +328,18 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     @IBAction func btnMuteThirdPartyTouchUpInside(_ sender: Any) {
         if let call = call, let participant = call.participants.first(where: { $0.participantType == .thirdParty }) {
             call.muteThirdPartyParticipant(identity: participant.identity, mute: participant.isAudioEnabled) { [weak self] error in
-                guard let self = self else { return }
-                
-                DispatchQueue.main.async {
-                    if let error = error {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                        return
-                    } else {
-                        let alert = UIAlertController(title: "Success", message: "muteThirdPartyParticipant", preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                         self.present(alert, animated: true)
-                         return
-                    }
+                guard let self else { return }
+
+                if let error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "muteThirdPartyParticipant", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
                 }
             }
         }
@@ -362,20 +348,18 @@ class VideoCallViewController: UIViewController, BLCallDelegate, BLChatDelegate 
     @IBAction func btnConfirmThirdPartyTouchUpInside(_ sender: Any) {
         if let call = call, let participant = call.participants.first(where: { $0.state == .confirmation }) {
             call.confirmThirdPartyParticipant(identity: participant.identity, confirm: true) { [weak self] error in
-                guard let self = self else { return }
+                guard let self else { return }
                 
-                DispatchQueue.main.async {
-                    if let error = error {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                        return
-                    } else {
-                        let alert = UIAlertController(title: "Success", message: "confirmThirdPartyParticipant", preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                         self.present(alert, animated: true)
-                         return
-                    }
+                if let error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    let alert = UIAlertController(title: "Success", message: "confirmThirdPartyParticipant", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return
                 }
             }
         }
