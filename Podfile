@@ -1,3 +1,5 @@
+source 'https://github.com/cocoapods/specs'
+
 target 'BoostlingoQuickstart' do
   platform :ios, '12.2'
   use_frameworks!
