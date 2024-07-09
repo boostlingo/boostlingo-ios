@@ -128,11 +128,11 @@ class ViewController: UIViewController, ViewControllerDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tfToken.text = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMjEyMjgiLCJyb2xlIjoiQ29ycG9yYXRlQ2xpZW50Um9vdEFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy91c2VyZGF0YSI6IntcIkN1cnJlbnRDb21wYW55SWRcIjoxMjE2LFwiTWFzdGVyQ29tcGFueUlkXCI6NDl9IiwiY3JlYXRlZCI6IjA3LzA5LzIwMjQgMDA6MTI6NTIiLCJ0b2tlbi1saWZldGltZSI6IjEwMDgwIiwiY3VsdHVyZUlkIjoiMSIsIndvcmtzdGF0aW9uLW1vZGUiOiJGYWxzZSIsIm5iZiI6MTcyMDQ4Mzk3MiwiZXhwIjoxNzIxMDg4NzcyLCJpYXQiOjE3MjA0ODM5NzIsImlzcyI6IkJvb3N0bGluZ28iLCJhdWQiOiJVc2VycyJ9.G8l65CYUutjkvxRPWsuVte5dhe08a_nxdJlZq3NwceodpMvHfeP_X94J7TVpD6ogAGVfJnJ-jpXL65G2jWEwKI91QA9yYx9SHDd5K80iOUfg-auYw60fiOtS2_TJg-OttcH7_ufqnIeStiBAHJ7qO6nxSPwpGBW3-JA75IoHy3QEGHcHt-pBPpzo5-75btyc7jGzsuHDvqGqTygXTLzKIFTne3Yr-ir5xqZJXGs9IlrHvSGLZTTgo8uexyc9gddK5EaBiaOpawoKmBpT79C52vlNhklv3CRDwlDbUm0XQ5uL9GfkN0dYnJHdR7qtrXEP_VLrmOxQrnif52QlGmj-sw"
         regions = BoostlingoSDK.getRegions()
         selectedRegion = regions.first(where: { region -> Bool in
-            return region == "qa"
+            return region == "staging"
         })
-        tfToken.text = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMjEyMjgiLCJyb2xlIjoiQ29ycG9yYXRlQ2xpZW50Um9vdEFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy91c2VyZGF0YSI6IntcIkN1cnJlbnRDb21wYW55SWRcIjoxMjE2LFwiTWFzdGVyQ29tcGFueUlkXCI6NDl9IiwiY3JlYXRlZCI6IjEwLzA2LzIwMjMgMTU6MDI6NDUiLCJ0b2tlbi1saWZldGltZSI6IjEwMDgwIiwiY3VsdHVyZUlkIjoiMSIsIm5iZiI6MTY5NjYwNDU2NSwiZXhwIjoxNjk3MjA5MzY1LCJpYXQiOjE2OTY2MDQ1NjUsImlzcyI6IkJvb3N0bGluZ28iLCJhdWQiOiJVc2VycyJ9.oJJ6mlXJhfSgbdNUfeviydf7U03tVJEGPxe7QNPj9YczlhL6x6ESHqw6kSKVnRL-xXDhByg74cE6Il_K0X_36_NOqbmelhnmi4IkyLv2RYtxmE_O242ECxdBPzPOddUcpiht8ppx6278OE1ot-43Kx5fSh8q6mLEyYcmOW5KMnBh2CoowtkRxQm7GstjxPH7pdRE80qeprxK_EEHMFIzRPOP0BxFVw-VogGR2V_kc-vfMz7tockyOcFSLvuMOjbEdqV4RzQ0ryGex3FX4KYQPdvQv_BDssdqI50hsbzkG8xgoB9WrNYpGEAEezbWKzx0Spa6KgtVE0N-48eP6oNNEg"
         state = .notAuthenticated
         print("Boostlingo SDK version: \(BoostlingoSDK.getVersion())")
     }

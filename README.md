@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '1.0.2'
+  pod 'BoostlingoSDK', '1.0.3'
 end
 ```
 
@@ -67,7 +67,7 @@ Now let's go to the Quickstart folder. Then run `pod install --verbose` to downl
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
-tfToken.text = "your token"
+BoostlingoSDK(authToken: "your token", region: "us", logger: BLPrintLogger())
 ```
 
 ### Create instance of Boostlingo class and load dictionaries
