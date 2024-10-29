@@ -18,7 +18,7 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '1.0.3'
+  pod 'BoostlingoSDK', '1.0.4'
 end
 ```
 
