@@ -128,6 +128,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tfToken.text = ""
         regions = BoostlingoSDK.getRegions()
         selectedRegion = regions.first(where: { region -> Bool in
             return region == "qa"

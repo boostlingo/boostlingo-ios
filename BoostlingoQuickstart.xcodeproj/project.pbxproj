@@ -29,7 +29,7 @@
 		84A3237A2AD0B7CD00A58A3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A1297223DA727300E6B062 /* Main.storyboard */; };
 		84A323812AD0B7EB00A58A3D /* Boostlingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A323802AD0B7EB00A58A3D /* Boostlingo.framework */; };
 		84A323822AD0B7EB00A58A3D /* Boostlingo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84A323802AD0B7EB00A58A3D /* Boostlingo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AAAF130A6E85D2FA1120304D /* Pods_BoostlingoQuickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766620C88CFD13CBDB6B2E49 /* Pods_BoostlingoQuickstart.framework */; };
+		8F64DE7A03550C0ACF162CBE /* Pods_BoostlingoQuickstartLocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E0A1FF9FEB316684A00C3 /* Pods_BoostlingoQuickstartLocal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,9 +47,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		33ECE15E0CBE27AD21E9E8FE /* Pods-BoostlingoQuickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.release.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.release.xcconfig"; sourceTree = "<group>"; };
+		30F83F67C093F319423A1003 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstartLocal.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal.debug.xcconfig"; sourceTree = "<group>"; };
+		4C8E0A1FF9FEB316684A00C3 /* Pods_BoostlingoQuickstartLocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoostlingoQuickstartLocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		514DB532D2DB6B4479D24550 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstartLocal.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal.release.xcconfig"; sourceTree = "<group>"; };
 		53D9270F2A793F7000FDCD0C /* CustomFieldDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldDefaultValueProvider.swift; sourceTree = "<group>"; };
-		766620C88CFD13CBDB6B2E49 /* Pods_BoostlingoQuickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoostlingoQuickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8417FCC823DA73AC009DA03C /* VoiceCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceCallViewController.swift; sourceTree = "<group>"; };
 		8417FCC923DA73AC009DA03C /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		8417FCCA23DA73AC009DA03C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		84A3237E2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostlingoQuickstartLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A3237F2AD0B7CD00A58A3D /* BoostlingoQuickstartLocal.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = BoostlingoQuickstartLocal.plist; path = "/Users/admin/dev/boostlingo-sdk-ios-src/BoostlingoQuickstart/BoostlingoQuickstartLocal.plist"; sourceTree = "<absolute>"; };
 		84A323802AD0B7EB00A58A3D /* Boostlingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Boostlingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAB9982ED09FBCF27223A4D7 /* Pods-BoostlingoQuickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostlingoQuickstart.debug.xcconfig"; path = "Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAAF130A6E85D2FA1120304D /* Pods_BoostlingoQuickstart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A323812AD0B7EB00A58A3D /* Boostlingo.framework in Frameworks */,
+				8F64DE7A03550C0ACF162CBE /* Pods_BoostlingoQuickstartLocal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,8 +92,8 @@
 		74E5DD9253188F3191319C03 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DAB9982ED09FBCF27223A4D7 /* Pods-BoostlingoQuickstart.debug.xcconfig */,
-				33ECE15E0CBE27AD21E9E8FE /* Pods-BoostlingoQuickstart.release.xcconfig */,
+				30F83F67C093F319423A1003 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */,
+				514DB532D2DB6B4479D24550 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -142,7 +142,7 @@
 				84A323802AD0B7EB00A58A3D /* Boostlingo.framework */,
 				848A29472ACF62260065292C /* Boostlingo.framework */,
 				848330DA2ACF2308007228B7 /* Boostlingo.framework */,
-				766620C88CFD13CBDB6B2E49 /* Pods_BoostlingoQuickstart.framework */,
+				4C8E0A1FF9FEB316684A00C3 /* Pods_BoostlingoQuickstartLocal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,11 +154,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84A1297D23DA727400E6B062 /* Build configuration list for PBXNativeTarget "BoostlingoQuickstart" */;
 			buildPhases = (
-				AD7958A80F047204128E1407 /* [CP] Check Pods Manifest.lock */,
 				84A1296523DA727300E6B062 /* Sources */,
 				84A1296623DA727300E6B062 /* Frameworks */,
 				84A1296723DA727300E6B062 /* Resources */,
-				FC2DACA8A3C940E55D41C324 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,10 +171,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84A3237B2AD0B7CD00A58A3D /* Build configuration list for PBXNativeTarget "BoostlingoQuickstartLocal" */;
 			buildPhases = (
+				FE490F7567C51C8FA7CD05BD /* [CP] Check Pods Manifest.lock */,
 				84A3236E2AD0B7CD00A58A3D /* Sources */,
 				84A323762AD0B7CD00A58A3D /* Frameworks */,
 				84A323772AD0B7CD00A58A3D /* Resources */,
 				84A323832AD0B7EB00A58A3D /* Embed Frameworks */,
+				D08C5240255B7016ADE42C70 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -245,7 +245,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AD7958A80F047204128E1407 /* [CP] Check Pods Manifest.lock */ = {
+		D08C5240255B7016ADE42C70 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstartLocal/Pods-BoostlingoQuickstartLocal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE490F7567C51C8FA7CD05BD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -260,28 +277,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BoostlingoQuickstart-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BoostlingoQuickstartLocal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FC2DACA8A3C940E55D41C324 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoostlingoQuickstart/Pods-BoostlingoQuickstart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -455,7 +455,6 @@
 		};
 		84A1297E23DA727400E6B062 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAB9982ED09FBCF27223A4D7 /* Pods-BoostlingoQuickstart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -467,7 +466,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -478,7 +477,6 @@
 		};
 		84A1297F23DA727400E6B062 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33ECE15E0CBE27AD21E9E8FE /* Pods-BoostlingoQuickstart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -490,7 +488,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -501,6 +499,7 @@
 		};
 		84A3237C2AD0B7CD00A58A3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30F83F67C093F319423A1003 /* Pods-BoostlingoQuickstartLocal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -513,7 +512,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -525,6 +524,7 @@
 		};
 		84A3237D2AD0B7CD00A58A3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 514DB532D2DB6B4479D24550 /* Pods-BoostlingoQuickstartLocal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -537,7 +537,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
