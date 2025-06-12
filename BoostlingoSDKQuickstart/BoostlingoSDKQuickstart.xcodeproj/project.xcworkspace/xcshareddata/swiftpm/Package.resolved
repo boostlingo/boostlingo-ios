@@ -1,0 +1,33 @@
+{
+  "originHash" : "394fb5bd88bfaeca91cac27b4764cf68737cda4044e0c765cb46d67ee52b7bd4",
+  "pins" : [
+    {
+      "identity" : "signalr-client-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moozzyk/SignalR-Client-Swift",
+      "state" : {
+        "revision" : "11e727b217b67b1440612df8aa0516d3013cccba",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "twilio-video-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twilio/twilio-video-ios",
+      "state" : {
+        "revision" : "a896521ecf73844731f00ed62f7d5afa487e0b3a",
+        "version" : "5.9.0"
+      }
+    },
+    {
+      "identity" : "twilio-voice-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twilio/twilio-voice-ios",
+      "state" : {
+        "revision" : "b1b2eec5352aa7511fe10da970b54de63db64cbd",
+        "version" : "6.13.1"
+      }
+    }
+  ],
+  "version" : 3
+}
