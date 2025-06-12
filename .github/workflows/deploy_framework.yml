@@ -1,0 +1,94 @@
+name: Deploy framework
+on:
+  workflow_dispatch:
+    inputs:
+      src_repository_ref:
+        description: 'Ref branch name for the SDK source repository.'
+        required: false
+        default: master
+        type: string
+jobs:
+  deploy_framework:
+    runs-on: macOS-15
+    permissions: 
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_16.3.app/Contents/Developer'
+
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          ref: release
+
+      - name: Prepare folders
+        run: | 
+          rm -rf *
+          mkdir src
+
+      - name: Checkout src repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WRITE_GITHUB_TOKEN }}
+          repository: boostlingo/boostlingo-sdk-ios-src
+          path: src
+          ref: ${{ github.event.inputs.src_repository_ref }}
+      
+      - name: Get SDK version
+        id: get_sdk_version
+        run: |
+          cd src
+          VERSION_NAME=v$(xcodebuild -project Boostlingo/Boostlingo.xcodeproj -showBuildSettings  | grep -i 'MARKETING_VERSION' | sed 's/[ ]*MARKETING_VERSION = //')
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+
+      - name: Archive SDK
+        run: |
+          cd src
+          sh archive.sh
+
+      - name: Update files and push changed
+        run: |
+          cp -r ./src/BoostlingoSDKQuickstart .
+          cp -a ./src/BoostlingoSDK/Sources/BoostlingoSDK/BoostlingoSDK.docc/BoostlingoSDK.md ./README.md
+          cp -a ./src/LICENSE ./LICENSE
+          cp -a ./src/Package.swift ./Package.swift
+          cp -r ./src/build .
+          rm -rf src
+          git add .
+          git commit -m '${{ steps.get_sdk_version.outputs.version_name }} auto update.'
+          git tag -a "${{ steps.get_sdk_version.outputs.version_name }}" -m "Auto tag ${{ steps.get_sdk_version.outputs.version_name }}"
+          git push
+          git push origin ${{ steps.get_sdk_version.outputs.version_name }}
+
+      - name: Make Github Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/Boostlingo.xcframework.zip
+          token: ${{ secrets.WRITE_GITHUB_TOKEN }}
+          tag_name: ${{ steps.get_sdk_version.outputs.version_name }}
+          repository: boostlingo/boostlingo-ios
+          
+      - name: Create pull request
+        id: create_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_BRANCH: release
+          TARGET_BRANCH: master
+        run: |
+          if gh pr list --head "${SOURCE_BRANCH}" \
+                        --base "${TARGET_BRANCH}" \
+                        --state open \
+                        --json number \
+            | jq -e '.[0]'; then
+              echo "A pull request already exists."
+          else
+              gh pr create --head "${SOURCE_BRANCH}" \
+                          --base "${TARGET_BRANCH}" \
+                          --title "Merge ${SOURCE_BRANCH} to ${TARGET_BRANCH}" \
+                          --body "Automated PR to keep ${TARGET_BRANCH} up to date."
+          fi
+
+
+
+
