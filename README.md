@@ -1,12 +1,27 @@
-# Boostlingo iOS
+# ``BoostlingoSDK``
 
 The Boostlingo iOS Swift library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.
 
 ## Getting Started
 
-In order to place calls in Boostlingo, you must have a requestor account. You can then embed Boostlingo iOS into your application, request a Boostlingo API token from your server, and start making calls.
+In order to place calls in Boostlingo, you must have a requestor account. You can then embed Boostlingo iOS SDK into your application, request a Boostlingo API token from your server, and start making calls.
 
 ## Installation
+
+### Swift Package Manager (recommended)
+
+You can add this SDK to your project using [Swift Package Manager](https://swift.org/package-manager/):
+
+1. In Xcode, go to **File > Add Packages...**
+2. Enter the repository URL: https://github.com/boostlingo/boostlingo-ios.git
+3. Select the version you want to install and add the package to your target.
+
+Or add it directly to your `Package.swift` dependencies:
+```swift
+dependencies: [
+ .package(url: "https://github.com/boostlingo/boostlingo-ios.git", from: "2.0.0")
+]
+```
 
 ### CocoaPods
 
@@ -18,11 +33,11 @@ source 'https://github.com/cocoapods/specs'
 target 'TARGET_NAME' do
   use_frameworks!
 
-  pod 'BoostlingoSDK', '1.0.5'
+  pod 'BoostlingoSDK', '2.0.0'
 end
 ```
 
-Then run `pod install --verbose` to install the dependencies to your project.
+Then run `pod install` to install the dependencies to your project.
 
 ## Usage
 
@@ -62,163 +77,77 @@ Response Model
 
 ### Quickstart
 
-This is a working example that will demonstrate how to Boostlingo calls.
-Now let's go to the Quickstart folder. Then run `pod install --verbose` to download and build dependencies.
+This is a working example that will demonstrate how to make Boostlingo calls.
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
-BoostlingoSDK(authToken: "your token", region: "us", logger: BLPrintLogger())
+let boostlingo = BoostlingoSDK(authToken: "your token", region: "us", logger: BLPrintLogger())
 ```
 
 ### Create instance of Boostlingo class and load dictionaries
 
-We recommend you do this only once. The Boostlingo library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required. In this example we populate a series of select dropdown inputs.
+Async `initialize()` method must be called after creating an instance of `BoostlingoSDK` to ensure all internal services are fully configured and ready to use. The library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required.
 
 ```swift
-// For production builds use BLNullLogger() or your custom logger
-boostlingo = BoostlingoSDK(authToken: self.tfToken.text ?? "", region: self.selectedRegion!, logger: BLPrintLogger())
-boostlingo!.getCallDictionaries() { [weak self] (callDictionaries, error) in
-    guard let self else { return }
-    
-    if error == nil {
-        self.languages = callDictionaries?.languages
-        self.serviceTypes = callDictionaries?.serviceTypes
-        self.genders = callDictionaries?.genders
-        self.selectedLanguageFrom = self.languages?.first(where: { item -> Bool in return item.id == 4 })?.id
-        self.selectedLanguageTo = self.languages?.first(where: { item -> Bool in return item.id == 1 })?.id
-        self.selectedServiceType = self.serviceTypes?.first(where: { item -> Bool in return item.id == 1 })?.id
-        self.selectedGender = self.genders?.first?.id
-        self.updateUI()
-        self.state = .authenticated
+// For production builds use BLNullLogger() or your custom logger.
+let boostlingo = BoostlingoSDK(
+    authToken: authToken,
+    region: "us",
+    logger: BLPrintLogger()
+)
+try await boostlingo.initialize()
+
+// Pulling down the call dictionaries.
+let dictionaries = try await boostlingo.getCallDictionaries()
+let languages = dictionaries?.languages ?? []
+let serviceTypes = dictionaries?.serviceTypes ?? []
+let genders = dictionaries?.genders ?? []
+```
+
+### Disposing Boostlingo SDK after use
+
+Async `dispose()` method should be used when you are finished using the SDK to ensure that all internal resources, such as network connections, memory, and background tasks, are properly released. After calling `dispose()`, the SDK instance should not be used again.
+
+```swift
+ await boostlingo.dispose()
+```
+
+### Retrieving the pre-call custom Form
+
+You can use the `getPreCallCustomForm` method to fetch the custom form configuration required before starting a call. This form may include fields that the user needs to fill out prior to initiating a call.
+The `getPreCallCustomForm` method returns a `PreCallCustomForm` object containing the form fields and metadata. If the form cannot be retrieved, the method will throw an error.
+
+```swift
+do {
+    let form = try await boostlingo.getPreCallCustomForm()
+    // Present the form to the user.
+    print("Form title: \(form.title)")
+    for field in form.fields {
+        print("Field: \(field.label) (\(field.type))")
     }
-    else {
-        self.state = .notAuthenticated
-        let message: String
-        switch error! {
-        case BLError.apiCall(_, let statusCode):
-            message = "\(error!.localizedDescription), statusCode: \(statusCode)"
-            break
-        default:
-            message = error!.localizedDescription
-            break
-        }
-        self.showErrorMessage(message)
-    }
+} catch {
+    print("Failed to fetch pre-call custom form: \(error)")
 }
-```
 
-### Implement BLCallDelegate
+...
 
-```swift
-// MARK: - BLCallDelegate
-    func callDidConnect(_ call: BLCall, participants: [BLParticipant]) {
-        DispatchQueue.main.async {
-            self.call = call as? BLVoiceCall
-            self.callId = self.call?.callId
-            self.delegate?.callId = self.callId
-            self.swMute.isOn = call.isMuted
-            self.state = .inprogress(interpreterName: self.call?.interlocutorInfo?.requiredName)
-        }
-    }
-    
-    func callDidDisconnect(_ error: Error?) {
-        DispatchQueue.main.async {
-            self.call = nil
-            self.state = .nocall
-            let title = error != nil ? "Error" : "Info"
-            let message = error != nil ? "Call did disconnect with error: \(error!.localizedDescription)" : "Call did disconnect"
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
-                guard let self = self else {
-                    return
-                }
-                self.navigationController?.popViewController(animated: true)
-            }))
-            self.present(alert, animated: true)
-        }
-    }
-    
-    func callDidFailToConnect(_ error: Error?) {
-        DispatchQueue.main.async {
-            self.call = nil
-            self.state = .nocall
-            let title = error != nil ? "Error" : "Info"
-            let message = error != nil ? "Call did fail to connect with error: \(error!.localizedDescription)" : "Call did fail to connect"
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (alert: UIAlertAction!) in
-                guard let self = self else {
-                    return
-                }
-                self.navigationController?.popViewController(animated: true)
-            }))
-            self.present(alert, animated: true)
-        }
-    }
-    
-    func callParticipantConnected(_ participant: BLParticipant, call: BLCall) {
-        print("Participants: \(call.participants.count)")
-        for p in call.participants {
-            printParticipant(p)
-        }
-    }
-    
-    func callParticipantUpdated(_ participant: BLParticipant, call: BLCall) {
-        print("Participants: \(call.participants.count)")
-        for p in call.participants {
-            printParticipant(p)
-        }
-    }
-    
-    func callParticipantDisconnected(_ participant: BLParticipant, call: BLCall) {
-        print("Participants: \(call.participants.count)")
-        for p in call.participants {
-            printParticipant(p)
-        }
-    }
-    
-    private func printParticipant(_ participant: BLParticipant) {
-        print("identity: \(participant.identity), isAudioEnabled: \(participant.isAudioEnabled), isVideoEnabled: \(participant.isVideoEnabled), muteActionIsEnabled: \(participant.muteActionIsEnabled), removeActionIsEnabled: \(participant.removeActionIsEnabled), requiredName: \(participant.requiredName), participantType: \(participant.participantType), rating: \(String(describing: participant.rating)), companyName: \(String(describing: participant.companyName)), state: \(participant.state)")
-    }
-```
+let fields = form.fields.map({ customField in
+    CustomFieldDto(
+        fieldId: customField.fieldId,
+        value: // User answer.
+    )
+}) ?? []
 
-### Retriving pre-call custom form
+...
 
-```swift
-boostlingo.getPreCallCustomForm() { [weak self] customFormData, error in
-    guard let self else { return }
-
-    if let error {
-        self.showErrorMessage(error.localizedDescription)
-        return
-    }
-
-    // Show you custom form UI here using the customFormData
-
-    let fieldData = customFormData?.fields.map({ customField in
-        CustomFieldDto(
-            fieldId: customField.fieldId,
-            value: // user answer
-        )
-    }) ?? []
-}
-```
-
-You should add answers collected from user to the `fieldData` list which can be used later for creating a call request:
-
-```swift
 let callRequest = CallRequest(
-    languageFromId: self.selectedLanguageFrom!,
-    languageToId: self.selectedLanguageTo!,
-    serviceTypeId: self.selectedServiceType!,
-    genderId: self.selectedGender,
-    isVideo: true,
-    data: [
-        AdditionalField(
-            key: "CustomKey",
-            value: "CustomValue"
-        )
-    ],
-    fieldData: fieldData
+    languageFromId: selectedLanguageFrom,
+    languageToId: selectedLanguageTo,
+    serviceTypeId: selectedServiceType,
+    genderId: selectedGender,
+    isVideo: isVideo,
+    data: [AdditionalField(key: "CustomKey", value: "CustomValue")],
+    fieldData: fields // Use your user responses here.
 )
 ```
 
@@ -281,134 +210,175 @@ public struct RadioButtonCustomField: CustomField, Hashable {
 }
 ```
 
-### Placing a voice call
+### Calls
 
-Before placing a call you will need to check record permission:
+Before placing a call you will need to check record permission. It's required to To initiate a voice call, use the `makeVoiceCall` or `makeVideoCall` methods provided by the SDK.
+
+#### Observing call events
+
+The SDK provides a `callEventStream` property of type `AsyncStream<BLCallFlowEvent>`, which allows you to observe call events in a modern, Swift-concurrency-friendly way.
+
+Instead of using weak delegates or callback protocols, you can use `callEventStream` to asynchronously receive updates about the call lifecycle, such as connection status, participant changes, or errors.
 
 ```swift
-private func checkRecordPermission(completion: @escaping (_ permissionGranted: Bool) -> Void) {
-    let permissionStatus: AVAudioSession.RecordPermission = AVAudioSession.sharedInstance().recordPermission
+func subscribeOnCallEvents() async {
+    let callEventTask = Task {
+        for await event in await state.boostlingo.callEventStream {
+            guard !Task.isCancelled else { break }
+            switch event {
+            case .callDidConnect(let call, participants: _): break
+            case .callDidDisconnect(let error):
+                await cancelSubscriptions()
+            case .callDidFailToConnect(let error):
+                await cancelSubscriptions()
+            case .participantConnected(let participant, call: let call): break
+            case .participantUpdated(let participant, call: let call): break
+            case .participantDisconnected(let participant, call: let call): break
+            @unknown default: break
+            }
+        }
+    }
+    await state.setCallEventTask(callEventTask)
+}
 
-    switch permissionStatus {
-    case .granted:
-        // Record permission already granted.
-        completion(true)
-        break
-    case .denied:
-        // Record permission denied.
-        completion(false)
-        break
-    case .undetermined:
-        // Requesting record permission.
-        // Optional: pop up app dialog to let the users know if they want to request.
-        AVAudioSession.sharedInstance().requestRecordPermission({ (granted) in
-            completion(granted)
-        })
-        break
+// You should cancel the subscriptions once the call is finished.
+func cancelSubscriptions() async {
+    await state.callEventsTask?.cancel()
+    await state.chatEventTask?.cancel()
+    await state.setCallEventTask(nil)
+    await state.setChatEventTask(nil)
+}
+```
+
+#### Observing chat events
+
+The SDK provides a `chatEventStream` property of type `AsyncStream<BLChatFlowEvent>`, which allows you to observe chat events in a modern, Swift-concurrency-friendly way.
+
+```swift
+func subscribeOnChatEvents() async {
+    let chatEventTask = Task {
+        for await event in await state.boostlingo.chatEventStream {
+            guard !Task.isCancelled else { break }
+            switch event {
+            case .chatConnected: break
+            case .chatDisconnected: break
+            case .chatMessageReceived(let message):
+                print("Chat: \(message.text)")
+            @unknown default: break
+            }
+        }
+    }
+    await state.setChatEventTask(chatEventTask)
+}
+
+// You should cancel the subscriptions once the call is finished.
+func cancelSubscriptions() async {
+    await state.callEventsTask?.cancel()
+    await state.chatEventTask?.cancel()
+    await state.setCallEventTask(nil)
+    await state.setChatEventTask(nil)
+}
+```
+
+#### Initiating a voice call
+
+```swift
+func startCall() {
+    Task {
+        do {
+            let callRequest = CallRequest(
+                languageFromId: selectedLanguageFrom,
+                languageToId: selectedLanguageTo,
+                serviceTypeId: selectedServiceType,
+                genderId: selectedGender,
+                isVideo: false,
+                data: [AdditionalField(key: "CustomKey", value: "CustomValue")],
+                fieldData: fields
+            )
+            await subscribeOnCallEvents()
+            await subscribeOnChatEvents()
+            let call = try await state.boostlingo.makeVoiceCall(callRequest: callRequest)
+            await state.setCall(call)
+            callState = .calling
+        } catch {
+            callState = .noCall
+            await showAlert(error.localizedDescription)
+            await cancelSubscriptions()
+        }
+    }
+}
+```
+
+#### Initiating a video call
+
+You don't have to check the camera permission, the sdk will do it by itself. But you will need to provide `TVIVideoView` container for the remote and local video tracks.
+
+```swift
+func startCall() {
+    Task {
+        do {
+            let callRequest = CallRequest(
+                languageFromId: selectedLanguageFrom,
+                languageToId: selectedLanguageTo,
+                serviceTypeId: selectedServiceType,
+                genderId: selectedGender,
+                isVideo: true,
+                data: [AdditionalField(key: "CustomKey", value: "CustomValue")],
+                fieldData: fields
+            )
+            await subscribeOnCallEvents()
+            await subscribeOnChatEvents()
+            let call = try await state.boostlingo.makeVideoCall(
+                callRequest: await callRequest,
+                localVideoView: localView
+            )
+            await state.setCall(call)
+            callState = .calling
+        } catch {
+            callState = .noCall
+            await showAlert(error.localizedDescription)
+            await cancelSubscriptions()
+        }
+    }
+}
+```
+
+Later you will need to add a `TVIVideoView` as a renderer for remote participants when they join.
+
+```swift
+case .participantConnected(let participant, call: let call):
+    print("callParticipantConnected")
+    switch participant.participantType {
+    case .interpreter:
+        if let renderer = await state.removeView {
+            await state.call?.addRenderer(
+                for: participant.identity,
+                renderer: renderer
+            )
+        }
+    case .thirdParty:
+        if let renderer = await state.thirdPartyParticipantView {
+            await state.call?.addRenderer(
+                for: participant.identity,
+                renderer: renderer
+            )
+        }
     default:
-        completion(false)
         break
     }
-}
 ```
 
-```swift
-boostlingo!.chatDelegate = self
-boostlingo!.makeVoiceCall(callRequest: callRequest!, delegate: self) { [weak self] call, error in
-    guard let self else { return }
-
-    if let error {
-        self.state = .nocall
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-            guard let self = self else {
-                return
-            }
-            self.navigationController?.popViewController(animated: true)
-        }))
-        self.present(alert, animated: true)
-        return
-    }
-    self.call = call
-    self.state = .calling
-}
-```
-
-### Placing a video call
-
-You don't have to check the camera permission, the sdk will do it by itself. But you will need to provide TVIVideoView container for the remote and local video tracks.
+#### Sending a chat message
 
 ```swift
-vRemoteVideo.contentMode = .scaleAspectFit
-vLocalVideo.contentMode = .scaleAspectFit
-boostlingo!.chatDelegate = self
-boostlingo!.makeVideoCall(callRequest: callRequest!, localVideoView: vLocalVideo, delegate: self) { [weak self] call, error in
-    guard let self else { return }
-
-    if let error {
-        self.state = .nocall
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self]  (alert: UIAlertAction!) in
-            guard let self = self else {
-                return
-            }
-            self.navigationController?.popViewController(animated: true)
-        }))
-        self.present(alert, animated: true)
-        return
-    }
-
-    self.call = call
-    self.state = .calling
-}
-
-// Adding a renderer for a participant
-call.addRenderer(for: participant.identity, renderer: self.vRemoteVideo)
-```
-
-### Using the chat functionality
-
-Subscribe for the chat related callback using _BLChatDelegate_.
-
-```swift
-boostlingo!.chatDelegate = self
-```
-
-```swift
-// MARK: - BLChatDelegate
-func chatConnected() {
-    
-}
-
-func chatDisconnected() {
-    
-}
-
-func chatMessageRecieved(message: ChatMessage) {
-    DispatchQueue.main.async {
-        let alert = UIAlertController(title: "Chat Message Recieved", message: message.text, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-}
-```
-
-Sending messages.
-
-```swift
-boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
-    guard let self else { return }
-
-    if let error = error {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-        return
-    } else {
-        let alert = UIAlertController(title: "Success", message: "Message sent", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-            return
+func sendTestMessage() {
+    Task {
+        do {
+            _ = try await state.boostlingo.sendChatMessage(text: "Test")
+            await showAlert("Message sent")
+        } catch {
+            await showAlert(error.localizedDescription)
+        }
     }
 }
 ```
@@ -418,17 +388,14 @@ boostlingo!.sendChatMessage(text: "Test") { [weak self] message, error in
 Getting requestor profile image url.
 
 ```swift
-boostlingo!.getProfile() { profile, error in
-    // Get the requestor profile URL
-    let url = profile?.imageInfo?.url(size: 64)
-}
+let url = try await boostlingo.getProfile()?.imageInfo?.url(size: 64)
 ```
 
 Getting a participant profile image url from _BLCall_.
 
 ```swift
 // Get the interpreter profile image URL
-let url = call?.participants.first?.imageInfo?.url(size: nil)
+let url = await call?.participants.first?.imageInfo?.url(size: nil)
 ```
 
 ## More Documentation
@@ -436,4 +403,5 @@ let url = call?.participants.first?.imageInfo?.url(size: nil)
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-ios/1.0/docs/index.html)
+* [Doc](https://github.com/boostlingo/boostlingo-ios/tree/master)
+
