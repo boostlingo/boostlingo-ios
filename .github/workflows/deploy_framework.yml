@@ -24,7 +24,6 @@ jobs:
 
       - name: Prepare folders
         run: | 
-          rm -rf *
           mkdir src
 
       - name: Checkout src repository
@@ -47,14 +46,22 @@ jobs:
           cd src
           sh archive.sh
 
-      - name: Update files and push changed
+      - name: Get framework checksum
+        id: get_framework_checksum
         run: |
-          cp -r ./src/BoostlingoSDKQuickstart .
-          cp -a ./src/BoostlingoSDK/Sources/BoostlingoSDK/BoostlingoSDK.docc/BoostlingoSDK.md ./README.md
-          cp -a ./src/LICENSE ./LICENSE
+          cd src
+          CHECKSUM=$(swift package compute-checksum build/Boostlingo.xcframework.zip)
+          echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
+
+      - name: Update files
+        run: |
           cp -a ./src/Package.swift ./Package.swift
           cp -r ./src/build .
+          sed -i '' "s/\(checksum: *\"\)[^\"]*\(\"\)/\1${{ steps.get_framework_checksum.outputs.checksum }}\2/" "Package.swift"
           rm -rf src
+          
+      - name: Push changed
+        run: | 
           git add .
           git commit -m '${{ steps.get_sdk_version.outputs.version_name }} auto update.'
           git tag -a "${{ steps.get_sdk_version.outputs.version_name }}" -m "Auto tag ${{ steps.get_sdk_version.outputs.version_name }}"
