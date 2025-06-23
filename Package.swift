@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "BoostlingoSDK",
+    name: "Boostlingo",
     platforms: [.iOS(.v14)],
     products: [
         .library(
