@@ -81,16 +81,16 @@ This is a working example that will demonstrate how to make Boostlingo calls.
 Update the placeholder of TOKEN with the token you got from the API.
 
 ```swift
-let boostlingo = BoostlingoSDK(authToken: "your token", region: "us", logger: BLPrintLogger())
+let boostlingo = Boostlingo(authToken: "your token", region: "us", logger: BLPrintLogger())
 ```
 
 ### Create instance of Boostlingo class and load dictionaries
 
-Async `initialize()` method must be called after creating an instance of `BoostlingoSDK` to ensure all internal services are fully configured and ready to use. The library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required.
+Async `initialize()` method must be called after creating an instance of `Boostlingo` to ensure all internal services are fully configured and ready to use. The library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required.
 
 ```swift
 // For production builds use BLNullLogger() or your custom logger.
-let boostlingo = BoostlingoSDK(
+let boostlingo = Boostlingo(
     authToken: authToken,
     region: "us",
     logger: BLPrintLogger()

@@ -7,8 +7,8 @@ let package = Package(
     platforms: [.iOS(.v14)],
     products: [
         .library(
-            name: "BoostlingoSDK",
-            targets: ["BoostlingoSDK"]
+            name: "Boostlingo",
+            targets: ["Boostlingo"]
         ),
     ],
     dependencies: [
@@ -18,9 +18,9 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "BoostlingoSDK",
-            url: "https://github.com/boostlingo/boostlingo-ios/releases/download/v2.0.0/Boostlingo.xcframework.zip",
-            checksum: "ac49e83bb618960497a3aff02a0c6ab364aa2d06aa43bd4e0cfe5cac68545a0e"
+            name: "Boostlingo",
+            url: "https://github.com/boostlingo/boostlingo-ios/releases/download/2.0.0/Boostlingo.xcframework.zip",
+            checksum: "8e92569fd32329e1edc78c5c96dcecf9eff96bd817f7da37e74968a5559b048c"
         ),
     ]
 )
