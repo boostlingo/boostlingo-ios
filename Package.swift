@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Boostlingo",
+    name: "BoostlingoSDK",
     platforms: [.iOS(.v14)],
     products: [
         .library(
-            name: "Boostlingo",
-            targets: ["Boostlingo"]
+            name: "BoostlingoSDK",
+            targets: ["BoostlingoSDK"]
         ),
     ],
     dependencies: [
@@ -19,8 +19,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Boostlingo",
-            url: "https://github.com/boostlingo/boostlingo-ios/releases/download/2.0.0/Boostlingo.xcframework.zip",
-            checksum: "838764a66c8617bb930d4321af798f8e2d0c86795d4b4119801f32f940b5f8a3"
+            url: "https://github.com/boostlingo/boostlingo-ios/releases/download/2.0.0/BoostlingoSDK.xcframework.zip",
+            checksum: "7402ea13662884cd992fd4103664b0ee61f76e784876cf1fa7cc0e497d643ebb"
         ),
     ]
 )
