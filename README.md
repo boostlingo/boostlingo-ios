@@ -403,5 +403,5 @@ let url = await call?.participants.first?.imageInfo?.url(size: nil)
 You can find more documentation and useful information below:
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
-* [Doc](https://github.com/boostlingo/boostlingo-ios/tree/master)
+* [Doc](https://boostlingo.github.io/boostlingo-ios)
 
