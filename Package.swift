@@ -18,7 +18,7 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "Boostlingo",
+            name: "BoostlingoSDK",
             url: "https://github.com/boostlingo/boostlingo-ios/releases/download/2.0.0/BoostlingoSDK.xcframework.zip",
             checksum: "7402ea13662884cd992fd4103664b0ee61f76e784876cf1fa7cc0e497d643ebb"
         ),
