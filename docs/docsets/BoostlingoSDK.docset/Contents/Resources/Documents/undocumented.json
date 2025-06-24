@@ -1,0 +1,1230 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Data/Errors/DataError.swift",
+      "line": 11,
+      "symbol": "DataError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Data/Errors/DataError.swift",
+      "line": 13,
+      "symbol": "DataError.decoding(name:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Data/Errors/DataError.swift",
+      "line": 15,
+      "symbol": "DataError.errorDescription",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Data/Errors/DataError.swift",
+      "line": 22,
+      "symbol": "DataError.createDecoding(type:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/AdditionalField.swift",
+      "line": 11,
+      "symbol": "AdditionalField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/AdditionalField.swift",
+      "line": 15,
+      "symbol": "AdditionalField.key",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/AdditionalField.swift",
+      "line": 16,
+      "symbol": "AdditionalField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/AdditionalField.swift",
+      "line": 20,
+      "symbol": "AdditionalField.init(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 16,
+      "symbol": "BLError.notInitialized",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 17,
+      "symbol": "BLError.validation(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 18,
+      "symbol": "BLError.signalRHubIsNotConnected(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 19,
+      "symbol": "BLError.signalRHub(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 20,
+      "symbol": "BLError.apiCall(description:statusCode:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 21,
+      "symbol": "BLError.noCall(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLError.swift",
+      "line": 22,
+      "symbol": "BLError.businessLogic(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 22,
+      "symbol": "BLParticipant.userAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 23,
+      "symbol": "BLParticipant.thirdPartyParticipantId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 24,
+      "symbol": "BLParticipant.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 25,
+      "symbol": "BLParticipant.participantType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 26,
+      "symbol": "BLParticipant.imageInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 27,
+      "symbol": "BLParticipant.requiredName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 28,
+      "symbol": "BLParticipant.rating",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 29,
+      "symbol": "BLParticipant.companyName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 30,
+      "symbol": "BLParticipant.state",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 31,
+      "symbol": "BLParticipant.isAudioEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 32,
+      "symbol": "BLParticipant.isVideoEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 34,
+      "symbol": "BLParticipant.muteActionIsEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipant.swift",
+      "line": 38,
+      "symbol": "BLParticipant.removeActionIsEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 11,
+      "symbol": "BLParticipantState",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 13,
+      "symbol": "BLParticipantState.confirmation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 14,
+      "symbol": "BLParticipantState.connecting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 15,
+      "symbol": "BLParticipantState.connected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 16,
+      "symbol": "BLParticipantState.disconnected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantState.swift",
+      "line": 17,
+      "symbol": "BLParticipantState.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantType.swift",
+      "line": 11,
+      "symbol": "BLParticipantType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantType.swift",
+      "line": 13,
+      "symbol": "BLParticipantType.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantType.swift",
+      "line": 14,
+      "symbol": "BLParticipantType.interpreter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantType.swift",
+      "line": 15,
+      "symbol": "BLParticipantType.thirdParty",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/BLParticipantType.swift",
+      "line": 16,
+      "symbol": "BLParticipantType.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 27,
+      "symbol": "CallDetails.callId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 28,
+      "symbol": "CallDetails.accountUniqueId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 29,
+      "symbol": "CallDetails.duration",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 30,
+      "symbol": "CallDetails.timeRequested",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 31,
+      "symbol": "CallDetails.timeAnswered",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDetails.swift",
+      "line": 32,
+      "symbol": "CallDetails.timeConnected",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 16,
+      "symbol": "CallDictionaries.languages",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 17,
+      "symbol": "CallDictionaries.serviceTypes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 18,
+      "symbol": "CallDictionaries.genders",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 26,
+      "symbol": "Language.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 27,
+      "symbol": "Language.code",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 28,
+      "symbol": "Language.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 29,
+      "symbol": "Language.englishName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 30,
+      "symbol": "Language.nativeName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 31,
+      "symbol": "Language.localizedName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 32,
+      "symbol": "Language.enabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 33,
+      "symbol": "Language.isSignLanguage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 34,
+      "symbol": "Language.isVideoBackstopStaffed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 35,
+      "symbol": "Language.vriPolicyOrder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 36,
+      "symbol": "Language.opiPolicyOrder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 44,
+      "symbol": "ServiceType.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 45,
+      "symbol": "ServiceType.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 46,
+      "symbol": "ServiceType.enabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 54,
+      "symbol": "Gender.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallDictionaries.swift",
+      "line": 55,
+      "symbol": "Gender.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 18,
+      "symbol": "CallRequest.languageFromId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 19,
+      "symbol": "CallRequest.languageToId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 20,
+      "symbol": "CallRequest.serviceTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 21,
+      "symbol": "CallRequest.genderId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 22,
+      "symbol": "CallRequest.isVideo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 23,
+      "symbol": "CallRequest.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 24,
+      "symbol": "CallRequest.fieldData",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 28,
+      "symbol": "CallRequest.init(languageFromId:languageToId:serviceTypeId:genderId:data:fieldData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/CallRequest.swift",
+      "line": 47,
+      "symbol": "CallRequest.init(languageFromId:languageToId:serviceTypeId:genderId:isVideo:data:fieldData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatMessage.swift",
+      "line": 18,
+      "symbol": "ChatMessage.user",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatMessage.swift",
+      "line": 19,
+      "symbol": "ChatMessage.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatMessage.swift",
+      "line": 20,
+      "symbol": "ChatMessage.sentTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatMessage.swift",
+      "line": 21,
+      "symbol": "ChatMessage.thirdPartyParticipantId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatMessage.swift",
+      "line": 22,
+      "symbol": "ChatMessage.thirdPartyDeviceId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatUser.swift",
+      "line": 18,
+      "symbol": "ChatUser.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ChatUser.swift",
+      "line": 19,
+      "symbol": "ChatUser.imageInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ImageInfo.swift",
+      "line": 18,
+      "symbol": "ImageInfo.imageKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ImageInfo.swift",
+      "line": 19,
+      "symbol": "ImageInfo.sizes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ImageInfo.swift",
+      "line": 20,
+      "symbol": "ImageInfo.baseUrl",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ImageInfo.swift",
+      "line": 23,
+      "symbol": "ImageInfo.fileExtension",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/ImageInfo.swift",
+      "line": 45,
+      "symbol": "ImageInfo.url(baseUrl:imageKey:fileExtension:size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 11,
+      "symbol": "CheckBoxCustomField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 13,
+      "symbol": "CheckBoxCustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 14,
+      "symbol": "CheckBoxCustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 15,
+      "symbol": "CheckBoxCustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 16,
+      "symbol": "CheckBoxCustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 17,
+      "symbol": "CheckBoxCustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 18,
+      "symbol": "CheckBoxCustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CheckBoxCustomField.swift",
+      "line": 19,
+      "symbol": "CheckBoxCustomField.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 11,
+      "symbol": "CustomField",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 13,
+      "symbol": "CustomField.Value",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 15,
+      "symbol": "CustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 16,
+      "symbol": "CustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 17,
+      "symbol": "CustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 18,
+      "symbol": "CustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 19,
+      "symbol": "CustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomField.swift",
+      "line": 20,
+      "symbol": "CustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldIdValue.swift",
+      "line": 11,
+      "symbol": "CustomFieldIdValue",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldIdValue.swift",
+      "line": 13,
+      "symbol": "CustomFieldIdValue.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldIdValue.swift",
+      "line": 14,
+      "symbol": "CustomFieldIdValue.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldOption.swift",
+      "line": 11,
+      "symbol": "CustomFieldOption",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldOption.swift",
+      "line": 13,
+      "symbol": "CustomFieldOption.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldOption.swift",
+      "line": 14,
+      "symbol": "CustomFieldOption.isDeleted",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldOption.swift",
+      "line": 15,
+      "symbol": "CustomFieldOption.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomFieldOption.swift",
+      "line": 16,
+      "symbol": "CustomFieldOption.order",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomForm.swift",
+      "line": 11,
+      "symbol": "CustomForm",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomForm.swift",
+      "line": 13,
+      "symbol": "CustomForm.fieldPolicyId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/CustomForm.swift",
+      "line": 14,
+      "symbol": "CustomForm.fields",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 11,
+      "symbol": "EditTextCustomField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 13,
+      "symbol": "EditTextCustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 14,
+      "symbol": "EditTextCustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 15,
+      "symbol": "EditTextCustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 16,
+      "symbol": "EditTextCustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 17,
+      "symbol": "EditTextCustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 18,
+      "symbol": "EditTextCustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/EditTextCustomField.swift",
+      "line": 19,
+      "symbol": "EditTextCustomField.fieldType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 11,
+      "symbol": "FieldType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 13,
+      "symbol": "FieldType.editTextSingleLine",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 14,
+      "symbol": "FieldType.editTextMultiLine",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 15,
+      "symbol": "FieldType.checkBox",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 16,
+      "symbol": "FieldType.radioButton",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 17,
+      "symbol": "FieldType.listSingle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 18,
+      "symbol": "FieldType.listMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 19,
+      "symbol": "FieldType.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/FieldType.swift",
+      "line": 21,
+      "symbol": "FieldType.getFieldType(id:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 11,
+      "symbol": "ListMultipleCustomField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 13,
+      "symbol": "ListMultipleCustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 14,
+      "symbol": "ListMultipleCustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 15,
+      "symbol": "ListMultipleCustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 16,
+      "symbol": "ListMultipleCustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 17,
+      "symbol": "ListMultipleCustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 18,
+      "symbol": "ListMultipleCustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListMultipleCustomField.swift",
+      "line": 19,
+      "symbol": "ListMultipleCustomField.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 11,
+      "symbol": "ListSingleCustomField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 13,
+      "symbol": "ListSingleCustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 14,
+      "symbol": "ListSingleCustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 15,
+      "symbol": "ListSingleCustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 16,
+      "symbol": "ListSingleCustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 17,
+      "symbol": "ListSingleCustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 18,
+      "symbol": "ListSingleCustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/ListSingleCustomField.swift",
+      "line": 19,
+      "symbol": "ListSingleCustomField.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 11,
+      "symbol": "RadioButtonCustomField",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 13,
+      "symbol": "RadioButtonCustomField.fieldId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 14,
+      "symbol": "RadioButtonCustomField.fieldTypeId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 15,
+      "symbol": "RadioButtonCustomField.label",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 16,
+      "symbol": "RadioButtonCustomField.readonly",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 17,
+      "symbol": "RadioButtonCustomField.required",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 18,
+      "symbol": "RadioButtonCustomField.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/PreCall/RadioButtonCustomField.swift",
+      "line": 19,
+      "symbol": "RadioButtonCustomField.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 18,
+      "symbol": "Profile.accountName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 19,
+      "symbol": "Profile.userAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 20,
+      "symbol": "Profile.companyAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 21,
+      "symbol": "Profile.email",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 22,
+      "symbol": "Profile.firstName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 23,
+      "symbol": "Profile.lastName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 24,
+      "symbol": "Profile.requiredName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Domain/Models/Profile.swift",
+      "line": 25,
+      "symbol": "Profile.imageInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 11,
+      "symbol": "BLLogger",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 13,
+      "symbol": "BLLogger.log(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 21,
+      "symbol": "BLLogLevel.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 22,
+      "symbol": "BLLogLevel.warning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 23,
+      "symbol": "BLLogLevel.info",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 24,
+      "symbol": "BLLogLevel.debug",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 39,
+      "symbol": "BLPrintLogger",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 43,
+      "symbol": "BLPrintLogger.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 50,
+      "symbol": "BLPrintLogger.log(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 55,
+      "symbol": "BLNullLogger",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 57,
+      "symbol": "BLNullLogger.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 60,
+      "symbol": "BLNullLogger.log(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 64,
+      "symbol": "BLFilteringLogger",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dkornev/dev/boostlingo-sdk-ios-src/BoostlingoSDK/BoostlingoSDK/Log/BLLogger.swift",
+      "line": 74,
+      "symbol": "BLFilteringLogger.log(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/dkornev/dev/boostlingo-sdk-ios-src"
+}

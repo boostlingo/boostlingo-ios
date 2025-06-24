@@ -2,6 +2,9 @@
 
 The Boostlingo iOS Swift library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.
 
+* [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
+* [Doc](https://boostlingo.github.io/boostlingo-ios)
+
 ## Getting Started
 
 In order to place calls in Boostlingo, you must have a requestor account. You can then embed Boostlingo iOS SDK into your application, request a Boostlingo API token from your server, and start making calls.
@@ -397,11 +400,3 @@ Getting a participant profile image url from _BLCall_.
 // Get the interpreter profile image URL
 let url = await call?.participants.first?.imageInfo?.url(size: nil)
 ```
-
-## More Documentation
-
-You can find more documentation and useful information below:
-
-* [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
-* [Doc](https://boostlingo.github.io/boostlingo-ios)
-
