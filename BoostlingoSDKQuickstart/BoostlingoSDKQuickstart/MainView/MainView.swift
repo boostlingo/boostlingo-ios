@@ -87,6 +87,11 @@ struct MainView: View {
                 Button("Video Call", action: viewModel.startVideoCall)
                     .disabled(viewModel.authState != .authenticated)
 
+                if viewModel.isAIInterpreterAvailable {
+                    Button("AI Interpreter Call", action: viewModel.startAICall)
+                        .disabled(viewModel.authState != .authenticated)
+                }
+
                 Button("Last Call Info", action: viewModel.fetchLastCallInfo)
                     .disabled(viewModel.authState != .authenticated || viewModel.callId == nil)
             }

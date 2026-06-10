@@ -3,7 +3,7 @@
 The Boostlingo iOS Swift library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.
 
 * [Quickstart](https://github.com/boostlingo/boostlingo-ios/tree/master)
-* [Doc](https://boostlingo.github.io/boostlingo-ios)
+* [Doc](https://boostlingo.github.io/boostlingo-ios/documentation/boostlingosdk/)
 
 ## Getting Started
 
@@ -22,25 +22,9 @@ You can add this SDK to your project using [Swift Package Manager](https://swift
 Or add it directly to your `Package.swift` dependencies:
 ```swift
 dependencies: [
- .package(url: "https://github.com/boostlingo/boostlingo-ios.git", from: "2.0.0")
+ .package(url: "https://github.com/boostlingo/boostlingo-ios.git", from: "2.1.0")
 ]
 ```
-
-### CocoaPods
-
-It's easy to install the framework if you manage your dependencies using [CocoaPods](https://cocoapods.org/). Simply add the following to your Podfile:
-
-```sh
-source 'https://github.com/cocoapods/specs'
-
-target 'TARGET_NAME' do
-  use_frameworks!
-
-  pod 'BoostlingoSDK', '2.0.0'
-end
-```
-
-Then run `pod install` to install the dependencies to your project.
 
 ## Usage
 
@@ -283,6 +267,24 @@ func cancelSubscriptions() async {
 }
 ```
 
+#### Observing AI Interpreter events
+
+When an AI Interpreter call is active, the same `callEventStream` emits two additional events that report when the AI starts and stops speaking. They complement the standard lifecycle events and are useful for driving UI indicators (a "speaking" animation, for example) or for gating input controls while the AI is responding.
+
+```swift
+for await event in await state.boostlingo.callEventStream {
+    guard !Task.isCancelled else { break }
+    switch event {
+    case .aiInterpreterStartedSpeaking(let call):
+        isAISpeaking = true
+    case .aiInterpreterStoppedSpeaking(let call):
+        isAISpeaking = false
+    // Handle the standard lifecycle events as shown in "Observing call events".
+    default: break
+    }
+}
+```
+
 #### Initiating a voice call
 
 ```swift
@@ -369,6 +371,51 @@ case .participantConnected(let participant, call: let call):
     default:
         break
     }
+```
+
+#### Initiating an AI Interpreter call
+
+The AI Interpreter call type uses the Twilio Voice audio path with the Boostlingo AI Interpreter as the remote interlocutor. The returned `BLAICall` inherits the full `BLVoiceCall` surface (mute, hang up, third-party dialing) and adds an `interrupt()` method so the user can stop the AI mid-utterance.
+
+Before offering AI Interpreter in your UI, gate it on availability and load the AI-specific language and service-type dictionaries:
+
+```swift
+guard try await boostlingo.isAIInterpreterAvailable() else { return }
+let languages = try await boostlingo.getAIInterpreterLanguages() ?? []
+let serviceTypes = try await boostlingo.getAIInterpreterServiceTypes() ?? []
+```
+
+Place the call with `makeAIInterpreterCall`. The SDK sets the AI flag on the request internally — you do not need to mutate `CallRequest` yourself:
+
+```swift
+func startCall() {
+    Task {
+        do {
+            let callRequest = CallRequest(
+                languageFromId: selectedLanguageFrom,
+                languageToId: selectedLanguageTo,
+                serviceTypeId: selectedServiceType,
+                genderId: nil,
+                isVideo: false,
+                data: [AdditionalField(key: "CustomKey", value: "CustomValue")],
+                fieldData: fields
+            )
+            await subscribeOnCallEvents()
+            let call = try await state.boostlingo.makeAIInterpreterCall(callRequest: callRequest)
+            await state.setCall(call)
+            callState = .calling
+        } catch {
+            callState = .noCall
+            await showAlert(error.localizedDescription)
+        }
+    }
+}
+```
+
+To interrupt the AI while it is speaking:
+
+```swift
+try await state.call?.interrupt()
 ```
 
 #### Sending a chat message

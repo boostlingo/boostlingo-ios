@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F3FE2952E0A535800336067 /* BoostlingoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3FE2942E0A535800336067 /* BoostlingoSDK */; };
-		6F3FE2982E0A537800336067 /* SignalRClient in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3FE2972E0A537800336067 /* SignalRClient */; };
-		6F3FE29B2E0A538400336067 /* TwilioVoice in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3FE29A2E0A538400336067 /* TwilioVoice */; };
-		6F3FE29E2E0A539100336067 /* TwilioVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3FE29D2E0A539100336067 /* TwilioVideo */; };
+		6F2647192FD9E49800BC996F /* BoostlingoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2647182FD9E49800BC996F /* BoostlingoSDK */; };
+		6FAD4B0B2FC11FA0007CC5C3 /* TwilioVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 6FAD4B0A2FC11FA0007CC5C3 /* TwilioVideo */; };
+		6FAD4B0D2FC11FA0007CC5C3 /* TwilioVideo-static in Frameworks */ = {isa = PBXBuildFile; productRef = 6FAD4B0C2FC11FA0007CC5C3 /* TwilioVideo-static */; };
+		6FAD4B102FC11FAB007CC5C3 /* TwilioVoice in Frameworks */ = {isa = PBXBuildFile; productRef = 6FAD4B0F2FC11FAB007CC5C3 /* TwilioVoice */; };
+		6FAD4B122FC11FAB007CC5C3 /* TwilioVoice-static in Frameworks */ = {isa = PBXBuildFile; productRef = 6FAD4B112FC11FAB007CC5C3 /* TwilioVoice-static */; };
+		6FAD4B152FC11FB6007CC5C3 /* SignalRClient in Frameworks */ = {isa = PBXBuildFile; productRef = 6FAD4B142FC11FB6007CC5C3 /* SignalRClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +32,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F3FE2982E0A537800336067 /* SignalRClient in Frameworks */,
-				6F3FE29B2E0A538400336067 /* TwilioVoice in Frameworks */,
-				6F3FE29E2E0A539100336067 /* TwilioVideo in Frameworks */,
-				6F3FE2952E0A535800336067 /* BoostlingoSDK in Frameworks */,
+				6FAD4B0B2FC11FA0007CC5C3 /* TwilioVideo in Frameworks */,
+				6FAD4B102FC11FAB007CC5C3 /* TwilioVoice in Frameworks */,
+				6FAD4B152FC11FB6007CC5C3 /* SignalRClient in Frameworks */,
+				6F2647192FD9E49800BC996F /* BoostlingoSDK in Frameworks */,
+				6FAD4B0D2FC11FA0007CC5C3 /* TwilioVideo-static in Frameworks */,
+				6FAD4B122FC11FAB007CC5C3 /* TwilioVoice-static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +48,6 @@
 			isa = PBXGroup;
 			children = (
 				6F48B5C92DDE4E960035F004 /* BoostlingoSDKQuickstart */,
-				6F48B62F2DDE4F670035F004 /* Frameworks */,
 				6F48B5C82DDE4E960035F004 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,13 +58,6 @@
 				6F48B5C72DDE4E960035F004 /* BoostlingoSDKQuickstart.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		6F48B62F2DDE4F670035F004 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,10 +80,12 @@
 			);
 			name = BoostlingoSDKQuickstart;
 			packageProductDependencies = (
-				6F3FE2942E0A535800336067 /* BoostlingoSDK */,
-				6F3FE2972E0A537800336067 /* SignalRClient */,
-				6F3FE29A2E0A538400336067 /* TwilioVoice */,
-				6F3FE29D2E0A539100336067 /* TwilioVideo */,
+				6FAD4B0A2FC11FA0007CC5C3 /* TwilioVideo */,
+				6FAD4B0C2FC11FA0007CC5C3 /* TwilioVideo-static */,
+				6FAD4B0F2FC11FAB007CC5C3 /* TwilioVoice */,
+				6FAD4B112FC11FAB007CC5C3 /* TwilioVoice-static */,
+				6FAD4B142FC11FB6007CC5C3 /* SignalRClient */,
+				6F2647182FD9E49800BC996F /* BoostlingoSDK */,
 			);
 			productName = BoostlingoSDKQuickstart;
 			productReference = 6F48B5C72DDE4E960035F004 /* BoostlingoSDKQuickstart.app */;
@@ -118,10 +116,10 @@
 			mainGroup = 6F48B5BE2DDE4E960035F004;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				6F3FE2932E0A535800336067 /* XCRemoteSwiftPackageReference "boostlingo-ios" */,
-				6F3FE2962E0A537800336067 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */,
-				6F3FE2992E0A538400336067 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */,
-				6F3FE29C2E0A539100336067 /* XCRemoteSwiftPackageReference "twilio-video-ios" */,
+				6FAD4B092FC11FA0007CC5C3 /* XCRemoteSwiftPackageReference "twilio-video-ios" */,
+				6FAD4B0E2FC11FAB007CC5C3 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */,
+				6FAD4B132FC11FB6007CC5C3 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */,
+				6F2647172FD9E49800BC996F /* XCRemoteSwiftPackageReference "boostlingo-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6F48B5C82DDE4E960035F004 /* Products */;
@@ -283,9 +281,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2FL58TQ7M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boostlingo Quickstart";
@@ -302,10 +300,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -322,9 +319,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2FL58TQ7M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boostlingo Quickstart";
@@ -341,10 +338,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostlingo.sdk.quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -379,60 +375,70 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6F3FE2932E0A535800336067 /* XCRemoteSwiftPackageReference "boostlingo-ios" */ = {
+		6F2647172FD9E49800BC996F /* XCRemoteSwiftPackageReference "boostlingo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/boostlingo/boostlingo-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.1.0;
 			};
 		};
-		6F3FE2962E0A537800336067 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/moozzyk/SignalR-Client-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
-		6F3FE2992E0A538400336067 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twilio/twilio-voice-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.13.2;
-			};
-		};
-		6F3FE29C2E0A539100336067 /* XCRemoteSwiftPackageReference "twilio-video-ios" */ = {
+		6FAD4B092FC11FA0007CC5C3 /* XCRemoteSwiftPackageReference "twilio-video-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twilio/twilio-video-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.0;
+				minimumVersion = 5.11.3;
+			};
+		};
+		6FAD4B0E2FC11FAB007CC5C3 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-voice-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.6;
+			};
+		};
+		6FAD4B132FC11FB6007CC5C3 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moozzyk/SignalR-Client-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6F3FE2942E0A535800336067 /* BoostlingoSDK */ = {
+		6F2647182FD9E49800BC996F /* BoostlingoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3FE2932E0A535800336067 /* XCRemoteSwiftPackageReference "boostlingo-ios" */;
+			package = 6F2647172FD9E49800BC996F /* XCRemoteSwiftPackageReference "boostlingo-ios" */;
 			productName = BoostlingoSDK;
 		};
-		6F3FE2972E0A537800336067 /* SignalRClient */ = {
+		6FAD4B0A2FC11FA0007CC5C3 /* TwilioVideo */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3FE2962E0A537800336067 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */;
-			productName = SignalRClient;
+			package = 6FAD4B092FC11FA0007CC5C3 /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
+			productName = TwilioVideo;
 		};
-		6F3FE29A2E0A538400336067 /* TwilioVoice */ = {
+		6FAD4B0C2FC11FA0007CC5C3 /* TwilioVideo-static */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3FE2992E0A538400336067 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */;
+			package = 6FAD4B092FC11FA0007CC5C3 /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
+			productName = "TwilioVideo-static";
+		};
+		6FAD4B0F2FC11FAB007CC5C3 /* TwilioVoice */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FAD4B0E2FC11FAB007CC5C3 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */;
 			productName = TwilioVoice;
 		};
-		6F3FE29D2E0A539100336067 /* TwilioVideo */ = {
+		6FAD4B112FC11FAB007CC5C3 /* TwilioVoice-static */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3FE29C2E0A539100336067 /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
-			productName = TwilioVideo;
+			package = 6FAD4B0E2FC11FAB007CC5C3 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */;
+			productName = "TwilioVoice-static";
+		};
+		6FAD4B142FC11FB6007CC5C3 /* SignalRClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FAD4B132FC11FB6007CC5C3 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */;
+			productName = SignalRClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

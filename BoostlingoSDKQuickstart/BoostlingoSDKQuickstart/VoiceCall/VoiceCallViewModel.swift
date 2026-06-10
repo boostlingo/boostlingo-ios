@@ -221,7 +221,8 @@ extension VoiceCallViewModel {
     
     func subscribeOnCallEvents() async {
         let callEventTask = Task {
-            for await event in await state.boostlingo.callEventStream {
+            let boostlingo = await state.boostlingo
+            for await event in await boostlingo.callEventStream {
                 guard !Task.isCancelled else { break }
                 switch event {
                 case .callDidConnect(let call, participants: _):
@@ -258,6 +259,9 @@ extension VoiceCallViewModel {
                     print("callParticipantDisconnected")
                     print("Participants: \(await call.participants.count)")
                     printParticipant(participant)
+                case .aiInterpreterStartedSpeaking, .aiInterpreterStoppedSpeaking:
+                    // AI Interpreter events are not relevant on a voice call.
+                    break
                 @unknown default: break
                 }
             }
@@ -273,7 +277,8 @@ extension VoiceCallViewModel {
 
     func subscribeOnChatEvents() async {
         let chatEventTask = Task {
-            for await event in await state.boostlingo.chatEventStream {
+            let boostlingo = await state.boostlingo
+            for await event in await boostlingo.chatEventStream {
                 guard !Task.isCancelled else { break }
                 switch event {
                 case .chatConnected: break

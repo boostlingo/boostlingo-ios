@@ -56,7 +56,8 @@ final class MainViewModel: Sendable, ViewControllerDelegate {
     var genders: [Gender] = []
     
     var alertMessage: String? = nil
-    
+    var isAIInterpreterAvailable: Bool = false
+
     let state: MainState
     
     init(navigationPath: Binding<[Screen]>) {
@@ -88,6 +89,7 @@ final class MainViewModel: Sendable, ViewControllerDelegate {
                 selectedLanguageTo = languages.first(where: { $0.id == 32 })?.id
                 selectedServiceType = serviceTypes.first(where: { $0.id == 1 })?.id
                 selectedGender = genders.first?.id
+                isAIInterpreterAvailable = try await boostlingo.isAIInterpreterAvailable()
                 authState = .authenticated
             } catch {
                 authState = .notAuthenticated
@@ -176,6 +178,37 @@ final class MainViewModel: Sendable, ViewControllerDelegate {
         Task { await startCall(isVideo: true) }
     }
 
+    func startAICall() {
+        Task {
+            let granted = await checkRecordPermission()
+            guard granted else {
+                showAlert("Microphone permission not granted")
+                return
+            }
+            await launchAICall()
+        }
+    }
+
+    private func launchAICall() async {
+        guard let boostlingo = await state.boostlingo else { return }
+
+        let callRequest = CallRequest(
+            languageFromId: selectedLanguageFrom!,
+            languageToId: selectedLanguageTo!,
+            serviceTypeId: selectedServiceType!,
+            genderId: selectedGender,
+            data: [AdditionalField(key: "CustomKey", value: "CustomValue")]
+        )
+
+        let vm = AICallViewModel(
+            boostlingo: boostlingo,
+            callRequest: callRequest,
+            navigationPath: state.navigationPath
+        )
+        vm.delegate.delegate = self
+        state.navigationPath.wrappedValue.append(.aiCall(vm))
+    }
+
     func fetchLastCallInfo() {
         guard let callId else { return }
         authState = .loading
@@ -199,6 +232,7 @@ final class MainViewModel: Sendable, ViewControllerDelegate {
             languages = []
             serviceTypes = []
             genders = []
+            isAIInterpreterAvailable = false
 
             selectedLanguageFrom = nil
             selectedLanguageTo = nil

@@ -31,6 +31,8 @@ struct AppView: View {
                         VoiceCallView(viewModel: vm)
                     case .videoCall(let vm):
                         VideoCallContainerView(viewModel: vm)
+                    case .aiCall(let vm):
+                        AICallView(viewModel: vm)
                     }
                 }
         }
@@ -38,7 +40,8 @@ struct AppView: View {
 }
 
 enum Screen: Hashable {
-    
+
     case voiceCall(VoiceCallViewModel)
     case videoCall(VideoCallViewModel)
+    case aiCall(AICallViewModel)
 }

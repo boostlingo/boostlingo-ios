@@ -236,7 +236,8 @@ extension VideoCallViewModel {
     
     func subscribeOnCallEvents() async {
         let callEventTask = Task {
-            for await event in await state.boostlingo.callEventStream {
+            let boostlingo = await state.boostlingo
+            for await event in await boostlingo.callEventStream {
                 guard !Task.isCancelled else { break }
                 switch event {
                 case .callDidConnect(let call, participants: let participants):
@@ -301,6 +302,9 @@ extension VideoCallViewModel {
                     print("Participants: \(await call.participants.count)")
                     remoteParticipantsCount = await call.participants.count
                     printParticipant(participant)
+                case .aiInterpreterStartedSpeaking, .aiInterpreterStoppedSpeaking:
+                    // AI Interpreter events are not relevant on a video call.
+                    break
                 @unknown default: break
                 }
             }
@@ -316,7 +320,8 @@ extension VideoCallViewModel {
     
     func subscribeOnChatEvents() async {
         let chatEventTask = Task {
-            for await event in await state.boostlingo.chatEventStream {
+            let boostlingo = await state.boostlingo
+            for await event in await boostlingo.chatEventStream {
                 guard !Task.isCancelled else { break }
                 switch event {
                 case .chatConnected: break
