@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "BoostlingoSDK",
-            targets: ["BoostlingoSDK"]
+            targets: ["BoostlingoSDKWrapper"]
         ),
     ],
     dependencies: [
@@ -18,9 +18,19 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "BoostlingoSDK",
+            name: "BoostlingoSDKBinary",
             url: "https://github.com/boostlingo/boostlingo-ios/releases/download/2.1.0/BoostlingoSDK.xcframework.zip",
             checksum: "4a121939604b3ee19eb2748e7d948f847fef93dc046fb40a28d5c75d717c1134"
+        ),
+        .target(
+            name: "BoostlingoSDKWrapper",
+            dependencies: [
+                "BoostlingoSDKBinary",
+                .product(name: "SignalRClient", package: "SignalR-Client-Swift"),
+                .product(name: "TwilioVoice",   package: "twilio-voice-ios"),
+                .product(name: "TwilioVideo",   package: "twilio-video-ios"),
+            ],
+            path: "Sources/BoostlingoSDKWrapper"
         ),
     ]
 )
