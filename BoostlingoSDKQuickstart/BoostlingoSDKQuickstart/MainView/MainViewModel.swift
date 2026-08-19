@@ -200,6 +200,13 @@ final class MainViewModel: Sendable, ViewControllerDelegate {
             data: [AdditionalField(key: "CustomKey", value: "CustomValue")]
         )
 
+        do {
+            try await boostlingo.validateCallReq(callReq: callRequest)
+        } catch {
+            showAlert(error.localizedDescription)
+            return
+        }
+
         let vm = AICallViewModel(
             boostlingo: boostlingo,
             callRequest: callRequest,

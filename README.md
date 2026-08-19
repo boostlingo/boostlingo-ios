@@ -22,7 +22,7 @@ You can add this SDK to your project using [Swift Package Manager](https://swift
 Or add it directly to your `Package.swift` dependencies:
 ```swift
 dependencies: [
- .package(url: "https://github.com/boostlingo/boostlingo-ios.git", from: "2.1.0")
+ .package(url: "https://github.com/boostlingo/boostlingo-ios.git", from: "2.1.1")
 ]
 ```
 
@@ -375,7 +375,7 @@ case .participantConnected(let participant, call: let call):
 
 #### Initiating an AI Interpreter call
 
-The AI Interpreter call type uses the Twilio Voice audio path with the Boostlingo AI Interpreter as the remote interlocutor. The returned `BLAICall` inherits the full `BLVoiceCall` surface (mute, hang up, third-party dialing) and adds an `interrupt()` method so the user can stop the AI mid-utterance.
+The AI Interpreter call type uses the Twilio Voice audio path with the Boostlingo AI Interpreter as the remote interlocutor. The returned `BLAICall` inherits the full `BLVoiceCall` surface (mute, hang up, third-party dialing) and adds an `interrupt()` method so the user can stop the AI mid-utterance. When the caller needs a person instead, the call can be rolled over to a human interpreter — see "Rolling over to a human interpreter" below.
 
 Before offering AI Interpreter in your UI, gate it on availability and load the AI-specific language and service-type dictionaries:
 
@@ -417,6 +417,34 @@ To interrupt the AI while it is speaking:
 ```swift
 try await state.call?.interrupt()
 ```
+
+#### Rolling over to a human interpreter
+
+When the caller wants a person instead of the AI, call `rolloverAICall` on the active AI Interpreter call. The SDK retires the AI call locally — its media session ends and no disconnect event is surfaced — and returns a fresh human `BLVoiceCall`. The server then drives that call to connected through the same `callEventStream` you already observe, exactly as a freshly placed voice call would.
+
+Feedback is optional. A bare `rolloverAICall()` is the "just get me a human" path. To attach the caller's reasons, pass any combination of `BLRolloverReason` values plus optional free text. The reasons and text are posted to the server before the handoff begins; if that post fails the active AI call is left intact and the error is rethrown.
+
+```swift
+func rolloverToHuman() {
+    Task {
+        do {
+            // Bare handoff: try await state.boostlingo.rolloverAICall()
+            let humanCall = try await state.boostlingo.rolloverAICall(
+                reasons: [.interpreterQuality, .other],
+                otherReason: "Caller asked for a person",
+                additionalFeedback: "AI struggled with domain terms"
+            )
+            // Keep `humanCall` as the active call. It is a BLVoiceCall, not a
+            // BLAICall, so AI-only controls such as interrupt() no longer apply.
+            await state.setCall(humanCall)
+        } catch {
+            await showAlert(error.localizedDescription)
+        }
+    }
+}
+```
+
+> Note: Roll-over is voice-only. The returned `BLVoiceCall` connects through the standard `.callDidConnect` event; observe `callEventStream` as shown in "Observing call events" to update your UI for the human interpreter.
 
 #### Sending a chat message
 
