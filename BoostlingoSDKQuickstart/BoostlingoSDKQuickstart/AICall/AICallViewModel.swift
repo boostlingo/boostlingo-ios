@@ -124,6 +124,37 @@ final class AICallViewModel: NSObject, Sendable {
         }
     }
 
+    /// Rolls the AI call over to a human, then replaces this screen with the
+    /// Voice Call screen (in adopt mode) to follow the returned `BLVoiceCall`.
+    func rolloverToHuman() {
+        Task {
+            do {
+                let humanCall = try await state.boostlingo.rolloverAICall(
+                    reasons: [.interpreterQuality],
+                    additionalFeedback: "Requested a human interpreter"
+                )
+                guard let humanCall else {
+                    await showAlert("Roll over did not return a voice call")
+                    return
+                }
+                let voiceViewModel = VoiceCallViewModel(
+                    boostlingo: await state.boostlingo,
+                    callRequest: await state.callRequest,
+                    existingCall: humanCall,
+                    navigationPath: state.navigationPath
+                )
+                voiceViewModel.delegate.delegate = delegate.delegate
+                // Stop reacting to call events before popping so this screen's
+                // disconnect handler can't pop the wrong screen.
+                await cancelSubscriptions()
+                state.navigationPath.wrappedValue.removeLast()
+                state.navigationPath.wrappedValue.append(.voiceCall(voiceViewModel))
+            } catch {
+                await showAlert(error.localizedDescription)
+            }
+        }
+    }
+
     func dialThirdParty() {
         Task {
             do {

@@ -68,7 +68,10 @@ final class VoiceCallViewModel: NSObject, Sendable {
 
     @ObservationIgnored let delegate = ViewControllerSendableDelegate()
     @ObservationIgnored let state: VoiceCallState
-    
+    // When true the call is already in progress (rolled over from an AI call),
+    // so `startCall()` adopts it instead of placing a new one.
+    @ObservationIgnored let adopted: Bool
+
     var callState: State = .noCall
     var isMuted = false
     var isSpeakerOn = false
@@ -79,18 +82,41 @@ final class VoiceCallViewModel: NSObject, Sendable {
         callRequest: CallRequest,
         navigationPath: Binding<[Screen]>
     ) {
+        self.adopted = false
         self.state = VoiceCallState(
             callRequest: callRequest,
             boostlingo: boostlingo,
             navigationPath: navigationPath
         )
     }
-    
+
+    /// Adopts the already-active `BLVoiceCall` returned by `rolloverAICall`,
+    /// observing its lifecycle instead of placing a new call.
+    init(
+        boostlingo: Boostlingo,
+        callRequest: CallRequest,
+        existingCall: BLVoiceCall,
+        navigationPath: Binding<[Screen]>
+    ) {
+        self.adopted = true
+        self.state = VoiceCallState(
+            callRequest: callRequest,
+            boostlingo: boostlingo,
+            call: existingCall,
+            navigationPath: navigationPath
+        )
+    }
+
     func startCall() {
         Task {
+            await subscribeOnCallEvents()
+            await subscribeOnChatEvents()
+            if adopted {
+                // Already in flight; just await .callDidConnect on the subscription.
+                callState = .calling
+                return
+            }
             do {
-                await subscribeOnCallEvents()
-                await subscribeOnChatEvents()
                 try await state.setCall(
                     state.boostlingo.makeVoiceCall(callRequest: state.callRequest)
                 )

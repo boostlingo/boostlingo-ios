@@ -43,6 +43,11 @@ struct AICallView: View {
                     viewModel.interruptAI()
                 }
                 .disabled(!isConnected || !viewModel.isAISpeaking)
+
+                Button("Roll Over to Human") {
+                    viewModel.rolloverToHuman()
+                }
+                .disabled(!isConnected)
             }
 
             Section("Participants") {
